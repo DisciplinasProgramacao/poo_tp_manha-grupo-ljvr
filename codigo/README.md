@@ -1,5 +1,10 @@
-# Código do Projeto
+# Estrutura do Projeto
 
-Mantenha neste diretório todo o código fonte do projeto. 
+## App
+Contém o aplicativo base da aplicação.
 
-Se necessário, descreva neste arquivo aspectos relevantes da estrutura de diretórios criada para organização do código.
+## Classes 
+Contém as classes da aplicação.
+
+## Tests
+Contém os testes de unidade das classes.
