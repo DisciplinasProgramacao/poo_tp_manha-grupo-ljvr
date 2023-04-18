@@ -8,29 +8,31 @@ public class Serie {
     private int visualizacoes = 0;
 
     /**
-     * Construtor de serie. Caso nome, idioma e genero for vazio sera inicializado com o valor null.
+     * Construtor de serie. Caso nome ou idioma ou genero for vazio sera
+     * inicializado com o valor null.
      * Sempre que for criado um novo objeto serie será contado uma visualização.
-     * @param nome String
+     * 
+     * @param nome   String
      * @param idioma String
      * @param genero String
-     */ 
-    Serie(String nome, String idioma, String genero){
-        
-        if(!nome.isEmpty()){
+     */
+    Serie(String nome, String idioma, String genero) {
+
+        if (!nome.isEmpty()) {
             this.nomeSerie = nome;
         } else {
             this.nomeSerie = null;
         }
 
-        if(!idioma.isEmpty()){
+        if (!idioma.isEmpty()) {
             this.idiomaSerie = idioma;
-        }else {
+        } else {
             this.nomeSerie = null;
         }
 
-        if(!genero.isEmpty()){
+        if (!genero.isEmpty()) {
             this.generoSerie = genero;
-        }else {
+        } else {
             this.nomeSerie = null;
         }
 
@@ -39,7 +41,7 @@ public class Serie {
     }
 
     // metodos
-    public void registrarVisualizacao(){
+    public void registrarVisualizacao() {
         visualizacoes++;
     }
 
