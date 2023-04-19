@@ -6,6 +6,17 @@ desktop.ini
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 
+### VisualStudioCode ###
+.vscode/*      # Maybe .vscode/**/* instead - see comments
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+**/.history
+
 # Local History for Visual Studio Code
 .history/
 
