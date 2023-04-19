@@ -10,8 +10,8 @@ public class Plataforma {
 	private ArrayList<Serie> listSeriesGeral;
 	/*
 	 * 
-	 * HashMap não é sincronizado, o que pode tornar sua utilização mais eficiente
-	 * em casos em que não há preocupação com múltiplas threads acessando a
+	 * HashMap nï¿½o ï¿½ sincronizado, o que pode tornar sua utilizaï¿½ï¿½o mais eficiente
+	 * em casos em que nï¿½o hï¿½ preocupaï¿½ï¿½o com mï¿½ltiplas threads acessando a
 	 * estrutura de dados.
 	 * 
 	 * 
@@ -23,10 +23,10 @@ public class Plataforma {
 	/**
 	 * O construtor da classe Pataforma
 	 * 
-	 * @param listSeriesGeral ArrayList que recebe como parâmetro os dados da classe
+	 * @param listSeriesGeral ArrayList que recebe como parï¿½metro os dados da classe
 	 *                        Serie,
 	 * @param tableClientes   Hashtable e
-	 * @param usuarioAtual    que recebem como parâmetros os dados do cliente da
+	 * @param usuarioAtual    que recebem como parï¿½metros os dados do cliente da
 	 *                        Classe Cliente
 	 * @return
 	 */
@@ -37,7 +37,7 @@ public class Plataforma {
 		usuarioAtual = null;
 	}
 
-	// métodos de acesso e controle
+	// mï¿½todos de acesso e controle
 
 	public ArrayList<Serie> getListSeriesGeral() {
 		return listSeriesGeral;
@@ -64,7 +64,7 @@ public class Plataforma {
 	}
 
 	/**
-	 * Método para adicionar um novo cliente. Adiciona um novo cliente na tabela
+	 * Mï¿½todo para adicionar um novo cliente. Adiciona um novo cliente na tabela
 	 * hash tableClientes, utilizando o e-mail do cliente como chave
 	 * 
 	 * @param novoCliente
@@ -74,7 +74,7 @@ public class Plataforma {
 	}
 
 	/**
-	 * O método removerCliente remove um cliente da tabela hash, utilizando o e-mail
+	 * O mï¿½todo removerCliente remove um cliente da tabela hash, utilizando o e-mail
 	 * como chave
 	 * 
 	 * @param email
@@ -84,7 +84,7 @@ public class Plataforma {
 	}
 
 	/**
-	 * O método adicionarSerie adiciona uma nova série no ArrayList listSeriesGeral
+	 * O mï¿½todo adicionarSerie adiciona uma nova sï¿½rie no ArrayList listSeriesGeral
 	 * 
 	 * @param novaSerie
 	 */
@@ -93,7 +93,7 @@ public class Plataforma {
 	}
 
 	/**
-	 * O método removerSerie remove uma série do ArrayList listSeriesGeral
+	 * O mï¿½todo removerSerie remove uma sï¿½rie do ArrayList listSeriesGeral
 	 * 
 	 * @param serie
 	 */
@@ -102,10 +102,10 @@ public class Plataforma {
 	}
 
 	/**
-	 * O método fazerLogin recebe como parâmetros o e-mail e a senha do cliente e
-	 * realiza a validação do login. Caso o e-mail esteja na tabela hash
-	 * tableClientes e a senha seja válida, o método define o cliente correspondente
-	 * como usuarioAtual e retorna true. Caso contrário, o método retorna false
+	 * O mï¿½todo fazerLogin recebe como parï¿½metros o e-mail e a senha do cliente e
+	 * realiza a validaï¿½ï¿½o do login. Caso o e-mail esteja na tabela hash
+	 * tableClientes e a senha seja vï¿½lida, o mï¿½todo define o cliente correspondente
+	 * como usuarioAtual e retorna true. Caso contrï¿½rio, o mï¿½todo retorna false
 	 * 
 	 * @param email
 	 * @param senha
@@ -114,7 +114,7 @@ public class Plataforma {
 	public boolean fazerLogin(String email, String senha) {
 		if (tableClientes.containsKey(email)) {
 			Cliente cliente = tableClientes.get(email);
-			if (cliente.getSenha().equals(senha)) { //falta get na classe Cliente
+			if (cliente.getSenha() == senha.hashCode()) { //falta get na classe Cliente
 				usuarioAtual = cliente;
 				return true;
 			}
@@ -123,16 +123,16 @@ public class Plataforma {
 	}
 
 	/**
-	 * Métodos a serem implementados futuramente
+	 * Mï¿½todos a serem implementados futuramente
 	 * @author jvasc
 	 */
 
-	// public void filtrarListaSerieGeralNome, que recebe como parâmetro o nome da
-	// série digitada pelo usuário
+	// public void filtrarListaSerieGeralNome, que recebe como parï¿½metro o nome da
+	// sï¿½rie digitada pelo usuï¿½rio
 
-	// public void filtrarListaSerieGeralIdioma, que recebe como parâmetro o idioma
-	// da série digitada pelo usuário
+	// public void filtrarListaSerieGeralIdioma, que recebe como parï¿½metro o idioma
+	// da sï¿½rie digitada pelo usuï¿½rio
 
-	// public void filtrarListaSerieGeralGenero, que recebe como parâmetro o gênero
-	// da série digitada pelo usuário
+	// public void filtrarListaSerieGeralGenero, que recebe como parï¿½metro o gï¿½nero
+	// da sï¿½rie digitada pelo usuï¿½rio
 }
