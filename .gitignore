@@ -1,6 +1,8 @@
 desktop.ini
 .vscode/*
 **vscode/
+.idea/
+**.iml
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
