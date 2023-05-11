@@ -2,7 +2,7 @@
 
 # Projeto - LJVR
 Trabalho da matéria Programação Orientada a Objetos, do curso de Sistemas de informação da Puc Minas.
-O trabalho sera dividido em partes, utilizando cada tema OO aprendido em sala de aula para melhorar a aplicação.
+O trabalho será dividido em partes, utilizando cada tema OO aprendido em sala de aula para melhorar a aplicação.
 
 ## Alunos integrantes da equipe
 
@@ -10,6 +10,7 @@ O trabalho sera dividido em partes, utilizando cada tema OO aprendido em sala de
 * Vinicius Andreata Dumont
 * Janaina Vasconcelos Alves
 * Rafael Lucas Rosa de Oliveira
+* Leandro Carvalho Horta de Araújo
 
 ## Professor responsável
 
