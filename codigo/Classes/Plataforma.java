@@ -8,36 +8,26 @@ public class Plataforma {
 
 	// atributos
 	private ArrayList<Serie> listSeriesGeral;
-	/*
-	 * 
-	 * HashMap n�o � sincronizado, o que pode tornar sua utiliza��o mais eficiente
-	 * em casos em que n�o h� preocupa��o com m�ltiplas threads acessando a
-	 * estrutura de dados.
-	 * 
-	 * 
-	 */
-	// private HashMap<String, Cliente> tableClientes;
-	private Hashtable<String, Cliente> tableClientes;
+	private HashMap<String, Cliente> tableClientes;
 	private Cliente usuarioAtual;
 
 	/**
 	 * O construtor da classe Pataforma
 	 * 
-	 * @param listSeriesGeral ArrayList que recebe como par�metro os dados da classe
-	 *                        Serie,
-	 * @param tableClientes   Hashtable e
-	 * @param usuarioAtual    que recebem como par�metros os dados do cliente da
-	 *                        Classe Cliente
+	 * @param listSeriesGeral ArrayList que recebe como parametro os dados da classe Serie
+	 *                       
+	 * @param tableClientes   Hashtable recebe como parametros os dados do cliente da Classe Cliente
+	 *                     
+	 * @param usuarioAtual    
 	 * @return
 	 */
 	public Plataforma() {
 		listSeriesGeral = new ArrayList<Serie>();
-		//tableClientes = new HashMap<String, Cliente>();
-		tableClientes = new Hashtable<String, Cliente>();
+		tableClientes = new HashMap<String, Cliente>();
 		usuarioAtual = null;
 	}
 
-	// m�todos de acesso e controle
+	// Metodos de acesso e controle
 
 	public ArrayList<Serie> getListSeriesGeral() {
 		return listSeriesGeral;
@@ -47,11 +37,11 @@ public class Plataforma {
 		this.listSeriesGeral = listSeriesGeral;
 	}
 
-	public Hashtable<String, Cliente> getTableClientes() {
+	public HashMap<String, Cliente> getTableClientes() {
 		return tableClientes;
 	}
 
-	public void setTableClientes(Hashtable<String, Cliente> tableClientes) {
+	public void setTableClientes(HashMap<String, Cliente> tableClientes) {
 		this.tableClientes = tableClientes;
 	}
 
@@ -64,17 +54,17 @@ public class Plataforma {
 	}
 
 	/**
-	 * M�todo para adicionar um novo cliente. Adiciona um novo cliente na tabela
-	 * hash tableClientes, utilizando o e-mail do cliente como chave
+	 * Metodo para adicionar um novo cliente. Adiciona um novo cliente na tabela
+	 * HashMap Clientes, utilizando o e-mail do cliente como chave
 	 * 
 	 * @param novoCliente
 	 */
 	public void adicionarCliente(Cliente novoCliente) {
-		tableClientes.put(novoCliente.getEmail(), novoCliente); //falta um get na classe cliente
+		tableClientes.put(novoCliente.getEmail(), novoCliente); 
 	}
 
 	/**
-	 * O m�todo removerCliente remove um cliente da tabela hash, utilizando o e-mail
+	 * O metodo removerCliente remove um cliente da tabela hashMap, utilizando o e-mail
 	 * como chave
 	 * 
 	 * @param email
@@ -84,7 +74,7 @@ public class Plataforma {
 	}
 
 	/**
-	 * O m�todo adicionarSerie adiciona uma nova s�rie no ArrayList listSeriesGeral
+	 * O metodo adicionarSerie adiciona uma nova serie no ArrayList listSeriesGeral
 	 * 
 	 * @param novaSerie
 	 */
@@ -93,7 +83,7 @@ public class Plataforma {
 	}
 
 	/**
-	 * O m�todo removerSerie remove uma s�rie do ArrayList listSeriesGeral
+	 * O metodo removerSerie remove uma serie do ArrayList listSeriesGeral
 	 * 
 	 * @param serie
 	 */
@@ -102,10 +92,10 @@ public class Plataforma {
 	}
 
 	/**
-	 * O m�todo fazerLogin recebe como par�metros o e-mail e a senha do cliente e
-	 * realiza a valida��o do login. Caso o e-mail esteja na tabela hash
-	 * tableClientes e a senha seja v�lida, o m�todo define o cliente correspondente
-	 * como usuarioAtual e retorna true. Caso contr�rio, o m�todo retorna false
+	 * O metodo fazerLogin recebe como parametros o e-mail e a senha do cliente e
+	 * realiza a validacao do login. Caso o e-mail esteja na tabela hash
+	 * tableClientes e a senha seja valida, o metodo define o cliente correspondente
+	 * como usuarioAtual e retorna true. Caso contrario, o metodo retorna false
 	 * 
 	 * @param email
 	 * @param senha
@@ -114,25 +104,36 @@ public class Plataforma {
 	public boolean fazerLogin(String email, String senha) {
 		if (tableClientes.containsKey(email)) {
 			Cliente cliente = tableClientes.get(email);
-			if (cliente.getSenha() == senha.hashCode()) { //falta get na classe Cliente
+			if (cliente.getSenha() == senha.hashCode()) { 
 				usuarioAtual = cliente;
 				return true;
 			}
 		}
 		return false;
 	}
+	
+	// a fazer
 
 	/**
-	 * M�todos a serem implementados futuramente
+	 * Metodo filtrarListaSerieGeralNome que recebe como parametro o nome da serie digitada pelo usuario 
 	 * @author jvasc
 	 */
 
-	// public void filtrarListaSerieGeralNome, que recebe como par�metro o nome da
-	// s�rie digitada pelo usu�rio
-
-	// public void filtrarListaSerieGeralIdioma, que recebe como par�metro o idioma
-	// da s�rie digitada pelo usu�rio
-
-	// public void filtrarListaSerieGeralGenero, que recebe como par�metro o g�nero
-	// da s�rie digitada pelo usu�rio
+	public void filtrarListaSerieGeralNome() {
+		
+	}
+	
+	/**
+	 * Metodo filtrarListaSerieGeralIdioma recebe como parametro o idioma digitado pelo usuario
+	 */
+	public void filtrarListaSerieGeralIdioma() {
+		
+	}
+	
+	/**
+	 * Metodo filtrarListaSerieGeralIdioma recebe como parametro o idioma digitado pelo usuario
+	 */
+	public void filtrarListaSerieGeralGenero() {
+		
+	}
 }
