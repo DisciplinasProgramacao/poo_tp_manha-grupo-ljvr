@@ -1,7 +1,6 @@
 package Classes;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.HashMap;
 
 public class Plataforma {
@@ -60,7 +59,7 @@ public class Plataforma {
 	 * @param novoCliente
 	 */
 	public void adicionarCliente(Cliente novoCliente) {
-		tableClientes.put(novoCliente.getEmail(), novoCliente); 
+		tableClientes.put(novoCliente.getLogin(), novoCliente); 
 	}
 
 	/**
