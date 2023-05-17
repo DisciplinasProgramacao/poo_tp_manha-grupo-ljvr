@@ -1,65 +1,44 @@
 package Classes;
 
-public class Serie {
+import java.time.LocalDate;
+
+public class Serie extends Midia {
+
     // atributos
-    private String nomeSerie;
-    private String idiomaSerie;
-    private String generoSerie;
-    private int visualizacoes = 0;
+    private int quantidadeEp;
 
     /**
-     * Construtor de serie. Caso nome ou idioma ou genero for vazio sera
-     * inicializado com o valor null.
-     * Sempre que for criado um novo objeto serie será contado uma visualização.
+     * Construtor de Serie
+     * <p>
+     * Caso a quantidadeEp for menor que 1 ira disparar uma IllegalArgumentException
      * 
-     * @param nome   String
-     * @param idioma String
-     * @param genero String
+     * @param idMidia        int
+     * @param nome           String
+     * @param idioma         String
+     * @param genero         String
+     * @param dataLancamento LocalDate
+     * @param quantidadeEp   int
      */
-    Serie(String nome, String idioma, String genero) {
+    public Serie(int idMidia, String nome, String idioma, String genero, LocalDate dataLancamento, int quantidadeEp) {
 
-        if (!nome.isEmpty()) {
-            this.nomeSerie = nome;
-        } else {
-            this.nomeSerie = null;
-        }
+        super(idMidia, nome, idioma, genero, dataLancamento);
 
-        if (!idioma.isEmpty()) {
-            this.idiomaSerie = idioma;
-        } else {
-            this.nomeSerie = null;
-        }
-
-        if (!genero.isEmpty()) {
-            this.generoSerie = genero;
-        } else {
-            this.nomeSerie = null;
-        }
-
-        registrarVisualizacao();
+        if (quantidadeEp > 0)
+            this.quantidadeEp = quantidadeEp;
+        else
+            throw new IllegalArgumentException("A quantidade de episodios da serie e menor que 1");
 
     }
 
-    // metodos
-    public void registrarVisualizacao() {
-        visualizacoes++;
+    // get and set
+
+    public int getQuantidadeEp() {
+        return quantidadeEp;
     }
 
-    // getters e setters
-    public String getNomeSerie() {
-        return nomeSerie;
-    }
-
-    public String getIdiomaSerie() {
-        return idiomaSerie;
-    }
-
-    public String getGeneroSerie() {
-        return generoSerie;
-    }
-
-    public int getVisualizacoes() {
-        return visualizacoes;
+    // set pode ser necessario caso a serie atualize o numero de ep
+    public void setQuantidadeEp(int quantidadeEp) {
+        this.quantidadeEp = quantidadeEp;
     }
 
 }
