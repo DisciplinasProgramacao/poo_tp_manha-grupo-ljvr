@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Cliente {
 
-    private String email;
+    private String login;
     private String senha;
     private String nome;
     private HashSet<Serie> listaSeriesFuturas = new HashSet<>();
@@ -19,19 +19,19 @@ public class Cliente {
      * aleatorios para o cliente.
      * 
      * @param nome
-     * @param email
+     * @param login
      * @param senha
      */
-    public Cliente(String nome, String email, String senha) {
-        inicializar(nome, email, senha);
+    public Cliente(String nome, String login, String senha) {
+        inicializar(nome, login, senha);
     }
 
-    private void inicializar(String nome, String email, String senha) {
+    private void inicializar(String nome, String login, String senha) {
 
-        if (email.isEmpty() || !email.contains("@")) {
-            this.email = gerarEmail();
+        if (login.isEmpty()) {
+            this.login = gerarLogin();
         } else {
-            this.email = email;
+            this.login = login;
         }
 
         if (senha.isEmpty()) {
@@ -43,9 +43,9 @@ public class Cliente {
         this.nome = nome;
     }
 
-    private String gerarEmail() {
+    private String gerarLogin() {
         Random nRandom = new Random(1);
-        return (Integer.toString(nRandom.nextInt(10000000)) + "@plataforma.com");
+        return (Integer.toString(nRandom.nextInt(10000000)));
     }
 
     private String gerarSenha() {
@@ -80,8 +80,8 @@ public class Cliente {
         listaSeriesAssistidas.add(serie);
     }
 
-    public String getEmail() {
-        return this.email;
+    public String getLogin() {
+        return this.login;
     }
 
     public int getSenha() {
