@@ -1,4 +1,4 @@
-# Backlog do projeto XXX
+# Backlog do projeto LJVR
 Atualizado em 14/06/2023
 
 ## Tarefas terminadas
