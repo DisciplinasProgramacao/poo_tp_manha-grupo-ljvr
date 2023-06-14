@@ -63,13 +63,13 @@ public class Plataforma {
 	}
 
 	/**
-	 * O metodo removerCliente remove um cliente da tabela hashMap, utilizando o e-mail
+	 * O metodo removerCliente remove um cliente da tabela hashMap, utilizando o login
 	 * como chave
 	 * 
 	 * @param email
 	 */
-	public void removerCliente(String email) {
-		tableClientes.remove(email);
+	public void removerCliente(String login) {
+		tableClientes.remove(login);
 	}
 
 	/**
