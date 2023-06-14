@@ -14,7 +14,7 @@ Atualizado em 14/06/2023
 
 | Tarefa      | Responsável |
 | ----------- | ----------- |
-| 1. Implementação dos métodos para carga de dados de séries, clientes e audiência em funcionamento      |  ➕➖     |
+| 1. Implementação dos métodos para carga de dados de séries, clientes e audiência em funcionamento      | Rafael ➕➖     |
 | 2. Atualização do diagrama para abrigar o novo tipo de mídia: Filme   | Luiz  ➕➖    |
 | 3. Implementação da lógica de carga de dados do catálogo de filmes |  ❌ | 
 | 4. Implementação do cadastro de clientes, filmes e séries |  ❌ | 
