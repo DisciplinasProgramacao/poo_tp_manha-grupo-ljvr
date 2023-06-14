@@ -36,19 +36,4 @@ public class App {
             System.out.println("Arquivo não encontrado.");
         }
     }
-   
-    public ArrayList<String[]> listaDadosArquivo(String arquivo) throws FileNotFoundException {
-        File dados = new File(arquivo);
-        Scanner leitorDados = new Scanner(dados);
-        ArrayList<String[]> lista = new ArrayList<>(60000);
-        String [] vetAux;
-        while(leitorDados.hasNextLine()){
-            vetAux = leitorDados.nextLine().split(";");
-            lista.add(vetAux);
-            //Cliente cliente = new Cliente(vetAux[0], vetAux[1], vetAux[2]);
-            //plataforma.adicionarCliente(cliente);
-        }
-        leitorDados.close();
-        return lista;
-    }
 }
