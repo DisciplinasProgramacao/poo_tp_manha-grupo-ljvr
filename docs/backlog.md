@@ -1,5 +1,5 @@
 # Backlog do projeto XXX
-Atualizado em DD/MM/AAAA
+Atualizado em 14/06/2023
 
 ## Tarefas terminadas
 
