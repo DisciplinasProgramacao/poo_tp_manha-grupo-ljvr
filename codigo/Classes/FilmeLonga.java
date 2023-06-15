@@ -1,7 +1,5 @@
 package Classes;
 
-import java.time.LocalDate;
-
 public class FilmeLonga extends Midia {
 
     // atributos
@@ -19,7 +17,7 @@ public class FilmeLonga extends Midia {
      * @param dataLancamento LocalDate
      * @param duracaoMin     String
      */
-    public FilmeLonga(int idMidia, String nome, String idioma, String genero, LocalDate dataLancamento,
+    public FilmeLonga(String idMidia, String nome, String idioma, String genero, String dataLancamento,
             int duracaoMin) {
 
         super(idMidia, nome, idioma, genero, dataLancamento);

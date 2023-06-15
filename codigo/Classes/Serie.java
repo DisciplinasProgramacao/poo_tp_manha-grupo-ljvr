@@ -1,7 +1,5 @@
 package Classes;
 
-import java.time.LocalDate;
-
 public class Serie extends Midia {
 
     // atributos
