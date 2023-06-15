@@ -19,7 +19,7 @@ public class Serie extends Midia {
      * @param dataLancamento LocalDate
      * @param quantidadeEp   int
      */
-    public Serie(int idMidia, String nome, String idioma, String genero, LocalDate dataLancamento, int quantidadeEp) {
+    public Serie(String idMidia, String nome, String idioma, String genero, String dataLancamento, int quantidadeEp) {
 
         super(idMidia, nome, idioma, genero, dataLancamento);
 
