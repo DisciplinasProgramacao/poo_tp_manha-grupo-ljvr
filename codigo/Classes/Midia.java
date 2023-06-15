@@ -1,15 +1,13 @@
 package Classes;
 
-import java.time.LocalDate;
-
 public abstract class Midia {
 
     // atributos
-    private int idMidia;
+    private String idMidia;
     private String nomeSerie;
     private String idiomaSerie;
     private String generoSerie;
-    private LocalDate dataLancamento;
+    private String dataLancamento;
     private int visualizacoes = 0;
 
     /**
@@ -27,10 +25,10 @@ public abstract class Midia {
      * @param nome           String
      * @param idioma         String
      * @param genero         String
-     * @param dataLancamento LocalDate
+     * @param dataLancamento String
      * 
      */
-    public Midia(int idMidia, String nome, String idioma, String genero, LocalDate dataLancamento) {
+    public Midia(String idMidia, String nome, String idioma, String genero, String dataLancamento) {
 
         // TO DO: rever esse construtor ao defininir como sera as datas
 
@@ -52,7 +50,7 @@ public abstract class Midia {
             throw new IllegalArgumentException("O genero atribuido a midia e vazio");
         }
 
-        if (idMidia >= 0)
+        if (idMidia != "0")
             this.idMidia = idMidia;
         else
             throw new IllegalArgumentException("O Id atribuido a midia e invalido");
@@ -85,11 +83,11 @@ public abstract class Midia {
         return visualizacoes;
     }
 
-    public int getIdMidia() {
+    public String getIdMidia() {
         return idMidia;
     }
 
-    public LocalDate getDataLancamento() {
+    public String getDataLancamento() {
         return dataLancamento;
     }
 
