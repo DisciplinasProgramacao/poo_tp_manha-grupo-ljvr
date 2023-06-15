@@ -1,7 +1,5 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import Classes.Cliente;
 import Classes.Plataforma;
 import Classes.Serie;
