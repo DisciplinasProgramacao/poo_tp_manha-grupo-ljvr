@@ -17,6 +17,27 @@ public class App {
     private static void carregaDadosIniciais() {
         carregaCliente();
         carregaSeries();
+        carregaAudiencia();
+        System.out.println();
+    }
+
+    private static void carregaAudiencia() {
+        try{
+            ArrayList <String[]> lista = FormataArquivos.listaDadosArquivo("Dados/POO_Audiencia.csv");
+            for(String[] linha:lista){
+                Cliente cliente = plataforma.encontrarCliente(linha[0]);
+                Serie serie = plataforma.encontrarSerie(linha[2]);
+                if(linha[1].equals("A")){
+                    cliente.adicionarListaSeriesAssistidas(serie);
+                }
+                else if (linha[1].equals("F")){
+                    cliente.adicionarListaSeriesFuturas(serie);
+                }
+            }
+        }
+        catch (FileNotFoundException ex){
+            System.out.println("Arquivo não encontrado.");
+        }
     }
 
     private static void carregaSeries() {
@@ -24,14 +45,11 @@ public class App {
             ArrayList <String[]> lista = FormataArquivos.listaDadosArquivo("Dados/POO_Series.csv");
             for(String[] linha:lista){
                 Serie serie = new Serie(linha[0], linha[1], "en", " ", linha[2], 1);
-                plataforma.adicionarSerie(serie);
+                plataforma.adicionarSerie(linha[0],serie);
             }
         }
         catch (FileNotFoundException ex){
             System.out.println("Arquivo não encontrado.");
-        }
-        catch (NumberFormatException ex){
-            System.out.println("Arquivo de Serie com formato inesperado. Verificar ID.");
         }
     }
 

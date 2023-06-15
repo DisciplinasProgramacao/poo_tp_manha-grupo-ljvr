@@ -13,12 +13,11 @@ public class FormataArquivos {
     public static ArrayList<String[]> listaDadosArquivo(String arquivo) throws FileNotFoundException {
         File dados = new File(arquivo);
         Scanner leitorDados = new Scanner(dados);
-        ArrayList<String[]> lista = new ArrayList<>(60000);
+        ArrayList<String[]> lista = new ArrayList<>(600000);
         String [] vetAux;
         while(leitorDados.hasNextLine()){
             vetAux = leitorDados.nextLine().split(";");
-            lista.add(vetAux);
-        }
+            lista.add(vetAux);        }
         leitorDados.close();
         return lista;
     }

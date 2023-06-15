@@ -7,6 +7,7 @@ Atualizado em 14/06/2023
 | ----------- | ----------- |
 | 1. Implementação das classes Cliente, Serie e PlataformaStreaming como originalmente planejadas      | Todos  ✔️     |
 | 2. Atualização do diagrama original para contemplar requisito de carga de dados   | Todos ✔️       |
+| 3. Implementação dos métodos para carga de dados de séries, clientes e audiência em funcionamento      | Rafael ✔️     |
 
 ----
 
@@ -14,15 +15,15 @@ Atualizado em 14/06/2023
 
 | Tarefa      | Responsável |
 | ----------- | ----------- |
-| 1. Implementação dos métodos para carga de dados de séries, clientes e audiência em funcionamento      | Rafael ➕➖     |
-| 2. Atualização do diagrama para abrigar o novo tipo de mídia: Filme   | Luiz  ➕➖    |
-| 3. Implementação da lógica de carga de dados do catálogo de filmes |  ❌ | 
-| 4. Implementação do cadastro de clientes, filmes e séries |  ❌ | 
-| 5. Salvar dados de clientes, filmes e séries |  ❌ | 
-| 6. Implementação do sistema de avaliação de mídias: uma mídia tem sua avaliação média |  ❌ | 
-| 7. Um cliente não pode avaliar a mesma mídia duas vezes |  ❌ | 
-| 8. Clientes podem ser regulares ou especialistas, e estes últimos podem adicionar comentários à avaliação |  ❌ | 
-| 9. Implementação do protótipo de sistema cobrindo os requisitos |  ❌ | 
-| 10. Garantir a robustez do sistema principal |  ❌ | 
+
+| 1. Atualização do diagrama para abrigar o novo tipo de mídia: Filme   | Luiz  ➕➖    |
+| 2. Implementação da lógica de carga de dados do catálogo de filmes |  ❌ | 
+| 3. Implementação do cadastro de clientes, filmes e séries |  ❌ | 
+| 4. Salvar dados de clientes, filmes e séries |  ❌ | 
+| 5. Implementação do sistema de avaliação de mídias: uma mídia tem sua avaliação média |  ❌ | 
+| 6. Um cliente não pode avaliar a mesma mídia duas vezes |  ❌ | 
+| 7. Clientes podem ser regulares ou especialistas, e estes últimos podem adicionar comentários à avaliação |  ❌ | 
+| 8. Implementação do protótipo de sistema cobrindo os requisitos |  ❌ | 
+| 9. Garantir a robustez do sistema principal |  ❌ | 
 
 

@@ -1,12 +1,11 @@
 package Classes;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Plataforma {
 
 	// atributos
-	private ArrayList<Serie> listSeriesGeral;
+	private HashMap<String,Serie> listSeriesGeral;
 	private HashMap<String, Cliente> tableClientes;
 	private Cliente usuarioAtual;
 
@@ -21,34 +20,36 @@ public class Plataforma {
 	 * @return
 	 */
 	public Plataforma() {
-		listSeriesGeral = new ArrayList<Serie>();
+		listSeriesGeral = new HashMap<String,Serie>();
 		tableClientes = new HashMap<String, Cliente>();
 		usuarioAtual = null;
 	}
 
 	// Metodos de acesso e controle
-
-	public ArrayList<Serie> getListSeriesGeral() {
-		return listSeriesGeral;
+	
+	/**
+	 * Retorna um Cliente, bunscando o partir do Login.
+	 * @param login Login do Usuario.
+	 * @return Cliente.
+	 */
+	public Cliente encontrarCliente(String login) {
+		return tableClientes.get(login);
 	}
 
-	public void setListSeriesGeral(ArrayList<Serie> listSeriesGeral) {
-		this.listSeriesGeral = listSeriesGeral;
-	}
-
-	public HashMap<String, Cliente> getTableClientes() {
-		return tableClientes;
-	}
-
-	public void setTableClientes(HashMap<String, Cliente> tableClientes) {
-		this.tableClientes = tableClientes;
+	/**
+	 * Retorna uma Midia, bunscando o partir do ID.
+	 * @param id ID da Midia.
+	 * @return Midia.
+	 */
+	public Serie encontrarSerie(String id) {
+		return listSeriesGeral.get(id);
 	}
 
 	public Cliente getUsuarioAtual() {
 		return usuarioAtual;
 	}
 
-	public void setUsuarioAtual(Cliente usuarioAtual) {
+	private void setUsuarioAtual(Cliente usuarioAtual) {
 		this.usuarioAtual = usuarioAtual;
 	}
 
@@ -77,8 +78,8 @@ public class Plataforma {
 	 * 
 	 * @param novaSerie
 	 */
-	public void adicionarSerie(Serie novaSerie) {
-		listSeriesGeral.add(novaSerie);
+	public void adicionarSerie(String id , Serie novaSerie) {
+		listSeriesGeral.put(id, novaSerie);
 	}
 
 	/**
@@ -86,8 +87,8 @@ public class Plataforma {
 	 * 
 	 * @param serie
 	 */
-	public void removerSerie(Serie serie) {
-		listSeriesGeral.remove(serie);
+	public void removerSerie(String id) {
+		listSeriesGeral.remove(id);
 	}
 
 	/**
@@ -104,7 +105,7 @@ public class Plataforma {
 		if (tableClientes.containsKey(email)) {
 			Cliente cliente = tableClientes.get(email);
 			if (cliente.getSenha() == senha.hashCode()) { 
-				usuarioAtual = cliente;
+				setUsuarioAtual(cliente);
 				return true;
 			}
 		}
