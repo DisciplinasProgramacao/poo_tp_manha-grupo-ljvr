@@ -15,7 +15,6 @@ Atualizado em 14/06/2023
 
 | Tarefa      | Responsável |
 | ----------- | ----------- |
-
 | 1. Atualização do diagrama para abrigar o novo tipo de mídia: Filme   | Luiz  ➕➖    |
 | 2. Implementação da lógica de carga de dados do catálogo de filmes |  ❌ | 
 | 3. Implementação do cadastro de clientes, filmes e séries |  ❌ | 
