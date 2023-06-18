@@ -88,28 +88,8 @@ public class Cliente {
         return this.senha.hashCode();
     }
 
-    public void filtrarSeriesFuturasNome(String nome) {
-        // TO DO
-    }
-
-    public void filtrarSeriesFuturasIdioma(String idioma) {
-        // TO DO
-    }
-
-    public void filtrarSeriesFuturasGenero(String genero) {
-        // TO DO
-    }
-
-    public void filtrarSeriesAssistidassNome(String nome) {
-        // TO DO
-    }
-
-    public void filtrarSeriesAssistidassIdioma(String idioma) {
-        // TO DO
-    }
-
-    public void filtrarSeriesAssistidassGenero(String genero) {
-        // TO DO
+    public String getNome() {
+        return nome;
     }
 
 }
