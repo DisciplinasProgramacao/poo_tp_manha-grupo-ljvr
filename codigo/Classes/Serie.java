@@ -33,10 +33,5 @@ public class Serie extends Midia {
     public int getQuantidadeEpSerie() {
         return quantidadeEpSerie;
     }
-
-    // set necessario caso a serie atualize o numero de ep
-    public void setQuantidadeEpSerie(int quantidadeEp) {
-        this.quantidadeEpSerie = quantidadeEp;
-    }
-
+    
 }
