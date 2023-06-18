@@ -1,95 +1,83 @@
 package Classes;
 
 import java.util.HashSet;
-import java.util.Random;
 
 public class Cliente {
 
-    private String login;
-    private String senha;
-    private String nome;
-    private HashSet<Serie> listaSeriesFuturas = new HashSet<>();
-    private HashSet<Serie> listaSeriesAssistidas = new HashSet<>();
+    private String loginCliente;
+    private String senhaCliente;
+    private String nomeCliente;
+    private HashSet<Midia> tableMidiasFuturas = new HashSet<>();
+    private HashSet<Midia> tableMidiasAssistidas = new HashSet<>();
 
     /**
      * Cria o Objeto Cliente recebendo os dados do usuario.
-     * Se o dado nome receber qualquer valor invalido ou em branco, será mantido em
-     * branco.
-     * Se os dados e-mail ou senha forem inseridos invalidos, seraão criados
-     * aleatorios para o cliente.
      * 
-     * @param nome
-     * @param login
-     * @param senha
+     * Se os dados e-mail, senha, senha forem inseridos invalidos <- TO DO
+     * 
+     * @param nomeCliente
+     * @param loginCliente
+     * @param senhaCliente
      */
-    public Cliente(String nome, String login, String senha) {
-        inicializar(nome, login, senha);
+    public Cliente(String nomeCliente, String loginCliente, String senhaCliente) {
+        inicializar(nomeCliente, loginCliente, senhaCliente);
     }
 
-    private void inicializar(String nome, String login, String senha) {
+    // TO DO: verificacoes de inicializacao
+    private void inicializar(String nomeCliente, String loginCliente, String senhaCliente) {
 
-        if (login.isEmpty()) {
-            this.login = gerarLogin();
+        if (loginCliente.isEmpty()) {
+            this.loginCliente = loginCliente;
         } else {
-            this.login = login;
+            this.loginCliente = loginCliente;
         }
 
-        if (senha.isEmpty()) {
-            this.senha = gerarSenha();
+        if (loginCliente.isEmpty()) {
+            this.senhaCliente = senhaCliente;
         } else {
-            this.senha = senha;
+            this.senhaCliente = senhaCliente;
         }
 
-        this.nome = nome;
-    }
-
-    private String gerarLogin() {
-        Random nRandom = new Random(1);
-        return (Integer.toString(nRandom.nextInt(10000000)));
-    }
-
-    private String gerarSenha() {
-        Random nRandom = new Random(1);
-        return Integer.toString(nRandom.nextInt(10000000));
+        this.nomeCliente = nomeCliente;
     }
 
     /**
-     * Adiciona uma série à lista de Series para Assistir Futuramente de um cliente
+     * Adiciona uma midia à table de midias para Assistir Futuramente de um cliente
      * especifico.
      * 
-     * @param serie
+     * @param Midia
      */
-    public void adicionarListaSeriesFuturas(Serie serie) {
-        listaSeriesFuturas.add(serie);
+    public void adicionarTableMidiasFuturas(Midia midia) {
+        tableMidiasFuturas.add(midia);
     }
 
     /**
-     * Remove uma série especifica da lista de Series para Assistir Futuramente de
+     * Remove uma midia especifica da table de midia para Assistir Futuramente de
      * um cliente.
      * 
-     * @param serie
+     * @param midia
      */
-    public void removerListaSeriesFuturas(Serie serie) {
-        listaSeriesFuturas.remove(serie);
+    public void removerTableMidiasFuturas(Midia midia) {
+        tableMidiasFuturas.remove(midia);
     }
 
     /**
-     * Adiciona uma série à lista de Series Assistidas de um cliente especifico.
+     * Adiciona uma midia à lista de midia Assistidas de um cliente especifico.
      */
-    public void adicionarListaSeriesAssistidas(Serie serie) {
-        listaSeriesAssistidas.add(serie);
+    public void adicionarTableMidiasAssistidas(Midia midia) {
+        tableMidiasAssistidas.add(midia);
     }
 
-    public String getLogin() {
-        return this.login;
+    public String getLoginCliente() {
+        return this.loginCliente;
     }
 
-    public int getSenha() {
-        return this.senha.hashCode();
+    public int getSenhaCliente() {
+        return this.senhaCliente.hashCode();
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeCliente() {
+        return nomeCliente;
     }
 
 }

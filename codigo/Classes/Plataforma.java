@@ -46,7 +46,7 @@ public class Plataforma {
 	public boolean fazerLogin(String email, String senha) {
 		if (tableClientes.containsKey(email)) {
 			Cliente cliente = tableClientes.get(email);
-			if (cliente.getSenha() == senha.hashCode()) {
+			if (cliente.getSenhaCliente() == senha.hashCode()) {
 				this.usuarioAtual = cliente;
 				return true;
 			}
@@ -83,7 +83,7 @@ public class Plataforma {
 	 * @param novoCliente
 	 */
 	public void adicionarCliente(Cliente novoCliente) {
-		tableClientes.put(novoCliente.getLogin(), novoCliente);
+		tableClientes.put(novoCliente.getLoginCliente(), novoCliente);
 	}
 
 	/**
