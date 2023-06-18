@@ -2,30 +2,26 @@ package Tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import Classes.Midia;
 import Classes.Serie;
 
 public class SerieTest {
 
     @Test
-    void testVisualizacaoAoInstanciarSerie() {
-        LocalDate dataExemplo = LocalDate.of(2050, 10, 5);
-        Serie serie1 = new Serie(321312, "Serie1", "PT-br", "Ação", dataExemplo, 10);
+    void testVisualizacaoAoInstanciarMidiaSerie() {
+        Midia serie = new Serie("225", "Mundo Louco", "Pt-br", "Humor e piadas", "23/11/2002", 55);
 
-        assertEquals(1, serie1.getVisualizacoesMidia());
+        assertEquals(1, serie.getVisualizacoesMidia());
 
     }
 
     @Test
-    public void testNumeroDeEpsInvalido() {
-        LocalDate dataExemplo = LocalDate.of(2050, 10, 5);
-
+    public void testNumeroDeEpsInvalidoAoInstanciarMidiaSerie() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new Serie(321312, "Serie1", "PT-br", "Ação", dataExemplo, 0);
+            new Serie("321312", "Serie1", "PT-br", "Ação", "22/01/2020", 0);
             ;
         });
     }
