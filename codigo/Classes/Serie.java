@@ -3,40 +3,40 @@ package Classes;
 public class Serie extends Midia {
 
     // atributos
-    private int quantidadeEp;
+    private int quantidadeEpSerie;
 
     /**
      * Construtor de Serie
      * <p>
      * Caso a quantidadeEp for menor que 1 ira disparar uma IllegalArgumentException
      * 
-     * @param idMidia        int
-     * @param nome           String
-     * @param idioma         String
-     * @param genero         String
-     * @param dataLancamento LocalDate
-     * @param quantidadeEp   int
+     * @param idSerie             int
+     * @param nomeSerie           String
+     * @param idiomaSerie         String
+     * @param generoSerie         String
+     * @param dataLancamentoSerie LocalDate
+     * @param quantidadeEpSerie   int
      */
-    public Serie(String idMidia, String nome, String idioma, String genero, String dataLancamento, int quantidadeEp) {
+    public Serie(String idSerie, String nomeSerie, String idiomaSerie, String generoSerie, String dataLancamentoSerie,
+            int quantidadeEpSerie) {
 
-        super(idMidia, nome, idioma, genero, dataLancamento);
+        super(idSerie, nomeSerie, idiomaSerie, generoSerie, dataLancamentoSerie);
 
-        if (quantidadeEp > 0)
-            this.quantidadeEp = quantidadeEp;
+        if (quantidadeEpSerie > 0)
+            this.quantidadeEpSerie = quantidadeEpSerie;
         else
             throw new IllegalArgumentException("A quantidade de episodios da serie e menor que 1");
 
     }
 
     // get and set
-
-    public int getQuantidadeEp() {
-        return quantidadeEp;
+    public int getQuantidadeEpSerie() {
+        return quantidadeEpSerie;
     }
 
-    // set pode ser necessario caso a serie atualize o numero de ep
-    public void setQuantidadeEp(int quantidadeEp) {
-        this.quantidadeEp = quantidadeEp;
+    // set necessario caso a serie atualize o numero de ep
+    public void setQuantidadeEpSerie(int quantidadeEp) {
+        this.quantidadeEpSerie = quantidadeEp;
     }
 
 }

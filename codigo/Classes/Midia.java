@@ -4,11 +4,11 @@ public abstract class Midia {
 
     // atributos
     private String idMidia;
-    private String nomeSerie;
-    private String idiomaSerie;
-    private String generoSerie;
-    private String dataLancamento;
-    private int visualizacoes = 0;
+    private String nomeMidia;
+    private String idiomaMidia;
+    private String generoMidia;
+    private String dataLancamentoMidia;
+    private int visualizacoesMidia = 0;
 
     /**
      * Construtor de midia.
@@ -33,19 +33,19 @@ public abstract class Midia {
         // TO DO: rever esse construtor ao defininir como sera as datas
 
         if (!nome.isEmpty()) {
-            this.nomeSerie = nome;
+            this.nomeMidia = nome;
         } else {
             throw new IllegalArgumentException("O nome atribuido a midia e vazio");
         }
 
         if (!idioma.isEmpty()) {
-            this.idiomaSerie = idioma;
+            this.idiomaMidia = idioma;
         } else {
             throw new IllegalArgumentException("O idioma atribuido a midia e vazio");
         }
 
         if (!genero.isEmpty()) {
-            this.generoSerie = genero;
+            this.generoMidia = genero;
         } else {
             throw new IllegalArgumentException("O genero atribuido a midia e vazio");
         }
@@ -55,7 +55,7 @@ public abstract class Midia {
         else
             throw new IllegalArgumentException("O Id atribuido a midia e invalido");
 
-        this.dataLancamento = dataLancamento;
+        this.dataLancamentoMidia = dataLancamento;
 
         registrarVisualizacao();
 
@@ -63,32 +63,32 @@ public abstract class Midia {
 
     // metodos
     public void registrarVisualizacao() {
-        visualizacoes++;
+        visualizacoesMidia++;
     }
 
     // getters
-    public String getNomeSerie() {
-        return nomeSerie;
+    public String getNomeMidia() {
+        return nomeMidia;
     }
 
-    public String getIdiomaSerie() {
-        return idiomaSerie;
+    public String getIdiomaMidia() {
+        return idiomaMidia;
     }
 
-    public String getGeneroSerie() {
-        return generoSerie;
+    public String getGeneroMidia() {
+        return generoMidia;
     }
 
-    public int getVisualizacoes() {
-        return visualizacoes;
+    public int getVisualizacoesMidia() {
+        return visualizacoesMidia;
     }
 
     public String getIdMidia() {
         return idMidia;
     }
 
-    public String getDataLancamento() {
-        return dataLancamento;
+    public String getDataLancamentoMidia() {
+        return dataLancamentoMidia;
     }
 
 }

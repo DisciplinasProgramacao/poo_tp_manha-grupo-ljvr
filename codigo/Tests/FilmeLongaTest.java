@@ -15,7 +15,7 @@ public class FilmeLongaTest {
         LocalDate dataExemplo = LocalDate.of(2050, 10, 5);
         FilmeLonga filmeLonga = new FilmeLonga(321312, "Filmin", "PT-br", "Ação", dataExemplo, 180);
 
-        assertEquals(1, filmeLonga.getVisualizacoes());
+        assertEquals(1, filmeLonga.getVisualizacoesMidia());
 
     }
 

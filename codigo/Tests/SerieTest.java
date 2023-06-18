@@ -16,7 +16,7 @@ public class SerieTest {
         LocalDate dataExemplo = LocalDate.of(2050, 10, 5);
         Serie serie1 = new Serie(321312, "Serie1", "PT-br", "Ação", dataExemplo, 10);
 
-        assertEquals(1, serie1.getVisualizacoes());
+        assertEquals(1, serie1.getVisualizacoesMidia());
 
     }
 
