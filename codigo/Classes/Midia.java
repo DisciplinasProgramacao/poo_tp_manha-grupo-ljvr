@@ -21,7 +21,7 @@ public abstract class Midia {
      * <p>
      * Sempre que for instanciado será contado uma visualização.
      * 
-     * @param idMidia        int
+     * @param idMidia        String
      * @param nome           String
      * @param idioma         String
      * @param genero         String

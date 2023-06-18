@@ -10,11 +10,11 @@ public class Serie extends Midia {
      * <p>
      * Caso a quantidadeEp for menor que 1 ira disparar uma IllegalArgumentException
      * 
-     * @param idSerie             int
+     * @param idSerie             String
      * @param nomeSerie           String
      * @param idiomaSerie         String
      * @param generoSerie         String
-     * @param dataLancamentoSerie LocalDate
+     * @param dataLancamentoSerie String
      * @param quantidadeEpSerie   int
      */
     public Serie(String idSerie, String nomeSerie, String idiomaSerie, String generoSerie, String dataLancamentoSerie,

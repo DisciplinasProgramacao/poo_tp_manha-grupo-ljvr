@@ -14,7 +14,7 @@ public class FilmeLonga extends Midia {
      * @param nomeFilmeLonga           String
      * @param idiomaFilmeLonga         String
      * @param generoFilmeLonga         String
-     * @param dataLancamentoFilmeLonga LocalDate
+     * @param dataLancamentoFilmeLonga String
      * @param duracaoMinFilmeLonga     String
      */
     public FilmeLonga(String idFilmeLonga, String nomeFilmeLonga, String idiomaFilmeLonga, String generoFilmeLonga,
