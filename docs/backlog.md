@@ -8,7 +8,7 @@ Atualizado em 18/06/2023
 | 1. Implementação das classes Cliente, Serie e PlataformaStreaming como originalmente planejadas      | Todos  ✔️     |
 | 2. Atualização do diagrama original para contemplar requisito de carga de dados   | Todos ✔️       |
 | 3. Implementação dos métodos para carga de dados de séries, clientes e audiência em funcionamento      | Rafael ✔️     |
-| . Atualização do diagrama para abrigar o novo tipo de mídia: Filme   | Luiz ✔️     |
+| 4 . Atualização do diagrama para abrigar o novo tipo de mídia: Filme   | Luiz ✔️     |
 
 ----
 
