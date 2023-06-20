@@ -1,5 +1,21 @@
 package Classes;
 
+/**
+ * Método auxiliar para calcular a média de uma mídia específica
+ */
+public double calcularMediaAvaliacoes() {
+    if (avaliacoes.isEmpty()) {
+        return 0.0;
+    }
+
+    	int somaNotas = 0;
+    	for (Avaliacao avaliacao : avaliacoes.values()) {
+        somaNotas += avaliacao.getNota();
+    }
+
+    	return (double) somaNotas / avaliacoes.size();
+	}
+
 public abstract class Midia {
 
     // atributos
@@ -9,6 +25,7 @@ public abstract class Midia {
     private String generoMidia;
     private String dataLancamentoMidia;
     private int visualizacoesMidia = 0;
+    private Map<Cliente, Avaliacao> avaliacoes;
 
     /**
      * Construtor de midia.
@@ -28,6 +45,11 @@ public abstract class Midia {
      * @param dataLancamento String
      * 
      */
+   
+   
+    /**
+     * 
+     
     public Midia(String idMidia, String nome, String idioma, String genero, String dataLancamento) {
 
         // TO DO: rever esse construtor ao defininir como sera as datas
@@ -58,9 +80,67 @@ public abstract class Midia {
         this.dataLancamentoMidia = dataLancamento;
 
         registrarVisualizacao();
+        }
+        */
 
+    /**
+     * Construtor
+     */
+    public Midia(String id, String nome, String idioma, String genero, String dataLancamento) {
+        this.id = id;
+        this.nome = nome;
+        this.idioma = idioma;
+        this.genero = genero;
+        this.dataLancamento = dataLancamento;
+        this.avaliacoes = new HashMap<>();
     }
 
+    /**
+     * Calcula a média individual de cada mídia que está dentro da tableMidiasGerais
+     */
+    public Map<Midia, Double> calcularMediaIndividualPorMidia() {
+        return tableMidiasGerais.entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getValue, entry -> entry.getValue().calcularMediaAvaliacoes()));
+    }
+}
+	
+	/**
+	 * Método Para calcular a média de uma mídia específica, recebendo o idMidia como chave
+	 */
+		
+	public Double calcularMediaIndividualPorMidia(String idMidia) {
+        Midia midia = tableMidiasGerais.get(idMidia);
+        if (midia != null) {
+            return midia.calcularMediaAvaliacoes();
+        }
+        return null;
+    }
+
+
+    /**
+     * adiciona uma avaliação e comentário
+     */
+    public void adicionarAvaliacao(Cliente cliente, int nota, String comentario) {
+        if (avaliacoes.containsKey(cliente)) {
+            throw new IllegalStateException("O cliente já avaliou esta mídia.");
+        }
+
+        Avaliacao avaliacao = new Avaliacao(cliente, nota, comentario);
+        avaliacoes.put(cliente, avaliacao);
+    }
+
+    /**
+     * Verifica se o cliente já avaliou a midia
+     */
+    public boolean hasAvaliacao(Cliente cliente) {
+        return avaliacoes.containsKey(cliente);
+    }
+
+    public Avaliacao getAvaliacao(Cliente cliente) {
+        return avaliacoes.get(cliente);
+    }
+    
+   
     // metodos
     public void registrarVisualizacao() {
         visualizacoesMidia++;

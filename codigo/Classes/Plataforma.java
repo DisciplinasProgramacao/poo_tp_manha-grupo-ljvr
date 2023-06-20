@@ -94,5 +94,7 @@ public class Plataforma {
 	public void adicionarMidia(String id, Midia novaMidia) {
 		tableMidiasGerais.put(id, novaMidia);
 	}
+	
+	
 
 }
