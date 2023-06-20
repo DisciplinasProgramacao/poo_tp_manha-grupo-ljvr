@@ -20,6 +20,7 @@ public class App {
         System.out.println();
     }
 
+
     /**
      * Carrega todos os Cliente no sistema se existir o arquivo Dados/POO_Audiencia.csv
      * Em caso de não encontrar o arquivo, o metodo informa na tela e encerra a inicialização do sistema

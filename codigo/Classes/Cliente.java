@@ -72,7 +72,7 @@ public class Cliente {
      * Chama o metodo de avaliar media da classe Media
      */
     public void adicionarAvaliacao(Midia midia, Avaliacao avaliacao){
-        midia.adicionarAvaliacao(this, avaliacao);
+        midia.adicionarAvaliacao(avaliacao);
     }
 
 
