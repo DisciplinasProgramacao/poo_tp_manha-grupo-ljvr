@@ -9,6 +9,7 @@ Atualizado em 18/06/2023
 | 2. Atualização do diagrama original para contemplar requisito de carga de dados   | Todos ✔️       |
 | 3. Implementação dos métodos para carga de dados de séries, clientes e audiência em funcionamento      | Rafael ✔️     |
 | 4 . Atualização do diagrama para abrigar o novo tipo de mídia: Filme   | Luiz ✔️     |
+| 5. Implementação da lógica de carga de dados do catálogo de filmes |  Rafael ✔️ | 
 
 ----
 
@@ -16,7 +17,6 @@ Atualizado em 18/06/2023
 
 | Tarefa      | Responsável |
 | ----------- | ----------- |
-| 2. Implementação da lógica de carga de dados do catálogo de filmes |  ❌ | 
 | 3. Implementação do cadastro de clientes, filmes e séries |  ❌ | 
 | 4. Salvar dados de clientes, filmes e séries |  ❌ | 
 | 5. Implementação do sistema de avaliação de mídias: uma mídia tem sua avaliação média |  ❌ | 
