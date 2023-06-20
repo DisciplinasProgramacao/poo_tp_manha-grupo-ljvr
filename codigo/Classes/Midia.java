@@ -1,7 +1,10 @@
 package Classes;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * Método auxiliar para calcular a média de uma mídia específica
+ * Mï¿½todo auxiliar para calcular a mï¿½dia de uma mï¿½dia especï¿½fica
  */
 public double calcularMediaAvaliacoes() {
     if (avaliacoes.isEmpty()) {
@@ -25,7 +28,7 @@ public abstract class Midia {
     private String generoMidia;
     private String dataLancamentoMidia;
     private int visualizacoesMidia = 0;
-    private Map<Cliente, Avaliacao> avaliacoes;
+    private Map<Cliente, Avaliacao> avaliacoes = new HashMap<>();
 
     /**
      * Construtor de midia.
@@ -45,10 +48,7 @@ public abstract class Midia {
      * @param dataLancamento String
      * 
      */
-   
-   
-    /**
-     * 
+    
      
     public Midia(String idMidia, String nome, String idioma, String genero, String dataLancamento) {
 
@@ -81,22 +81,10 @@ public abstract class Midia {
 
         registrarVisualizacao();
         }
-        */
+        
 
     /**
-     * Construtor
-     */
-    public Midia(String id, String nome, String idioma, String genero, String dataLancamento) {
-        this.id = id;
-        this.nome = nome;
-        this.idioma = idioma;
-        this.genero = genero;
-        this.dataLancamento = dataLancamento;
-        this.avaliacoes = new HashMap<>();
-    }
-
-    /**
-     * Calcula a média individual de cada mídia que está dentro da tableMidiasGerais
+     * Calcula a mï¿½dia individual de cada mï¿½dia que estï¿½ dentro da tableMidiasGerais
      */
     public Map<Midia, Double> calcularMediaIndividualPorMidia() {
         return tableMidiasGerais.entrySet().stream()
@@ -105,7 +93,7 @@ public abstract class Midia {
 }
 	
 	/**
-	 * Método Para calcular a média de uma mídia específica, recebendo o idMidia como chave
+	 * Mï¿½todo Para calcular a mï¿½dia de uma mï¿½dia especï¿½fica, recebendo o idMidia como chave
 	 */
 		
 	public Double calcularMediaIndividualPorMidia(String idMidia) {
@@ -118,19 +106,19 @@ public abstract class Midia {
 
 
     /**
-     * adiciona uma avaliação e comentário
+     * adiciona uma avaliaï¿½ï¿½o e comentï¿½rio
      */
-    public void adicionarAvaliacao(Cliente cliente, int nota, String comentario) {
+    public void adicionarAvaliacao(Cliente cliente, int nota) {
         if (avaliacoes.containsKey(cliente)) {
-            throw new IllegalStateException("O cliente já avaliou esta mídia.");
+            throw new IllegalStateException("O cliente jï¿½ avaliou esta mï¿½dia.");
         }
 
-        Avaliacao avaliacao = new Avaliacao(cliente, nota, comentario);
+        Avaliacao avaliacao = new Avaliacao(nota, cliente);
         avaliacoes.put(cliente, avaliacao);
     }
 
     /**
-     * Verifica se o cliente já avaliou a midia
+     * Verifica se o cliente jï¿½ avaliou a midia
      */
     public boolean hasAvaliacao(Cliente cliente) {
         return avaliacoes.containsKey(cliente);

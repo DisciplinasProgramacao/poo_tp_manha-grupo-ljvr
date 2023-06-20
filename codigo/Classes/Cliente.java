@@ -9,7 +9,6 @@ public class Cliente {
     private String nomeCliente;
     private HashSet<Midia> tableMidiasFuturas = new HashSet<>();
     private HashSet<Midia> tableMidiasAssistidas = new HashSet<>();
-    private Map<String, Avaliacao> avaliacoes;
 
     /**
      * Cria o Objeto Cliente recebendo os dados do usuario.
@@ -22,12 +21,6 @@ public class Cliente {
      */
     public Cliente(String nomeCliente, String loginCliente, String senhaCliente) {
         inicializar(nomeCliente, loginCliente, senhaCliente);
-    }
-    
-    public Cliente(String login, String senha) {
-        this.login = login;
-        this.senha = senha;
-        this.avaliacoes = new HashMap<>();
     }
 
     // TO DO: verificacoes de inicializacao
@@ -75,27 +68,26 @@ public class Cliente {
         tableMidiasAssistidas.add(midia);
     }
     
-    
+    //TO do rever necessidade do cÃ³digo.
     public void adicionarAvaliacao(Midia midia, int nota, String comentario) {
         if (avaliacoes.containsKey(midia.getId())) {
-            throw new IllegalStateException("Você já avaliou esta mídia.");
+            throw new IllegalStateException("Vocï¿½ jï¿½ avaliou esta mï¿½dia.");
         }
 
-        Avaliacao avaliacao = new Avaliacao(this, nota, comentario);
+        Avaliacao avaliacao = new Avaliacao(nota, comentario);
         avaliacoes.put(midia.getId(), avaliacao);
     }
 
-    public boolean hasAvaliacao(Midia midia) {
-        return avaliacoes.containsKey(midia.getId());
-    }
 
+    /*
     public boolean isEspecialista() {
         int contadorAvaliacoesMesAnterior = 0;
-        // Lógica para contar as avaliações do mês anterior
+        // Lï¿½gica para contar as avaliaï¿½ï¿½es do mï¿½s anterior
         // ...
 
         return contadorAvaliacoesMesAnterior >= 5;
     }
+    */
     
 
     public String getLoginCliente() {
