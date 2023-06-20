@@ -42,7 +42,7 @@ public class Cliente {
     }
 
     /**
-     * Adiciona uma midia à table de midias para Assistir Futuramente de um cliente
+     * Adiciona uma midia a table de midias para Assistir Futuramente de um cliente
      * especifico.
      * 
      * @param Midia
@@ -62,33 +62,21 @@ public class Cliente {
     }
 
     /**
-     * Adiciona uma midia à lista de midia Assistidas de um cliente especifico.
+     * Adiciona uma midia a lista de midia Assistidas de um cliente especifico.
      */
     public void adicionarTableMidiasAssistidas(Midia midia) {
         tableMidiasAssistidas.add(midia);
     }
     
-    //TO do rever necessidade do código.
-    public void adicionarAvaliacao(Midia midia, int nota, String comentario) {
-        if (avaliacoes.containsKey(midia.getId())) {
-            throw new IllegalStateException("Voc� j� avaliou esta m�dia.");
-        }
-
-        Avaliacao avaliacao = new Avaliacao(nota, comentario);
-        avaliacoes.put(midia.getId(), avaliacao);
+    /**
+     * Chama o metodo de avaliar media da classe Media
+     */
+    public void adicionarAvaliacao(Midia midia, Avaliacao avaliacao){
+        midia.adicionarAvaliacao(this, avaliacao);
     }
 
 
-    /*
-    public boolean isEspecialista() {
-        int contadorAvaliacoesMesAnterior = 0;
-        // L�gica para contar as avalia��es do m�s anterior
-        // ...
-
-        return contadorAvaliacoesMesAnterior >= 5;
-    }
-    */
-    
+   
 
     public String getLoginCliente() {
         return this.loginCliente;

@@ -3,21 +3,6 @@ package Classes;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * M�todo auxiliar para calcular a m�dia de uma m�dia espec�fica
- */
-public double calcularMediaAvaliacoes() {
-    if (avaliacoes.isEmpty()) {
-        return 0.0;
-    }
-
-    	int somaNotas = 0;
-    	for (Avaliacao avaliacao : avaliacoes.values()) {
-        somaNotas += avaliacao.getNota();
-    }
-
-    	return (double) somaNotas / avaliacoes.size();
-	}
 
 public abstract class Midia {
 
@@ -82,48 +67,41 @@ public abstract class Midia {
         registrarVisualizacao();
         }
         
-
-    /**
-     * Calcula a m�dia individual de cada m�dia que est� dentro da tableMidiasGerais
-     */
-    public Map<Midia, Double> calcularMediaIndividualPorMidia() {
-        return tableMidiasGerais.entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getValue, entry -> entry.getValue().calcularMediaAvaliacoes()));
-    }
-}
-	
 	/**
-	 * M�todo Para calcular a m�dia de uma m�dia espec�fica, recebendo o idMidia como chave
-	 */
-		
-	public Double calcularMediaIndividualPorMidia(String idMidia) {
-        Midia midia = tableMidiasGerais.get(idMidia);
-        if (midia != null) {
-            return midia.calcularMediaAvaliacoes();
+     * Retorna a media da avaliação de uma Midia. Se não houver avaliações, será retornado 0.
+     * @return Retorna um valor double, a media das notas.
+     */
+    public double calcularMediaAvaliacoes() {
+        if (avaliacoes.isEmpty()) {
+            return 0.0;
         }
-        return null;
+
+        int somaNotas = avaliacoes.values().stream()
+                .mapToInt(Avaliacao::getNota)
+                .sum();
+
+        return (double) somaNotas / avaliacoes.size();
     }
 
-
     /**
-     * adiciona uma avalia��o e coment�rio
+     * Adiciona uma avaliacao a midia e verifica se o cliente ja avaliou a midia. Caso ja tenha avaliado sera lancada uma mensagem de procedimento ilegal.
+     *
+     * @param cliente O cliente que realiza a avaliação.
+     * @param avaliacao    A avaliacao a ser atribuida a midia (entre 1 e 5).
      */
-    public void adicionarAvaliacao(Cliente cliente, int nota) {
+    public void adicionarAvaliacao(Cliente cliente, Avaliacao avaliacao) {
         if (avaliacoes.containsKey(cliente)) {
-            throw new IllegalStateException("O cliente j� avaliou esta m�dia.");
+            throw new IllegalStateException("O cliente ja avaliou esta media.");
         }
-
-        Avaliacao avaliacao = new Avaliacao(nota, cliente);
         avaliacoes.put(cliente, avaliacao);
     }
 
+    
     /**
-     * Verifica se o cliente j� avaliou a midia
+     * Retorna a avaliação de um cliente. Retorna nulo se o cliente não tiver avaliado a midia.
+     * @param cliente Cliente
+     * @return Avaliacao;
      */
-    public boolean hasAvaliacao(Cliente cliente) {
-        return avaliacoes.containsKey(cliente);
-    }
-
     public Avaliacao getAvaliacao(Cliente cliente) {
         return avaliacoes.get(cliente);
     }

@@ -1,17 +1,24 @@
 package Classes;
 
 public class Avaliacao {
-	private double nota;
+	private int nota;
 	private Cliente cliente;
+	private final int NOTAMAXINA = 5;
 
-	public Avaliacao(double nota, Cliente cliente) {
-	   this.nota = nota;
-	   this.cliente = cliente;
-	   //TO do validar dados;
-	 }
+	public Avaliacao(int nota, Cliente cliente) {
+        validarNota(nota);
+        this.nota = nota;
+        this.cliente = cliente;
+    }
+	
+	private void validarNota(int nota) {
+        if (nota < 1 || nota > NOTAMAXINA) {
+            throw new IllegalArgumentException("A nota deve estar entre 1 e " + NOTAMAXINA);
+        }
+    }
 	
 
-	public double getNota() {
+	public int getNota() {
 	    return nota;
 	}
 
