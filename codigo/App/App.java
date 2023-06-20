@@ -1,8 +1,6 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import Classes.Cliente;
-import Classes.Plataforma;
-import Classes.Serie;
+import Classes.*;
 
 public class App {
 
@@ -26,12 +24,12 @@ public class App {
             ArrayList <String[]> lista = FormataArquivos.listaDadosArquivo("Dados/POO_Audiencia.csv");
             for(String[] linha:lista){
                 Cliente cliente = plataforma.encontrarCliente(linha[0]);
-                Serie serie = plataforma.encontrarSerie(linha[2]);
+                Midia serie = plataforma.encontrarMidia(linha[2]);
                 if(linha[1].equals("A")){
-                    cliente.adicionarListaSeriesAssistidas(serie);
+                    cliente.adicionarTableMidiasAssistidas(serie);
                 }
                 else if (linha[1].equals("F")){
-                    cliente.adicionarListaSeriesFuturas(serie);
+                    cliente.adicionarTableMidiasFuturas(serie);
                 }
             }
         }
@@ -45,7 +43,7 @@ public class App {
             ArrayList <String[]> lista = FormataArquivos.listaDadosArquivo("Dados/POO_Series.csv");
             for(String[] linha:lista){
                 Serie serie = new Serie(linha[0], linha[1], "en", " ", linha[2], 1);
-                plataforma.adicionarSerie(linha[0],serie);
+                plataforma.adicionarMidia(linha[0],serie);
             }
         }
         catch (FileNotFoundException ex){
