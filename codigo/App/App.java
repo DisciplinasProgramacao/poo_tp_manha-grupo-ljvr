@@ -14,12 +14,17 @@ public class App {
 
     private static void carregaDadosIniciais() {
         carregaCliente();
+        carregaFilmes();
         carregaSeries();
         carregaAudiencia();
         System.out.println();
     }
 
-    private static void carregaAudiencia() {
+    /**
+     * Carrega todos os Cliente no sistema se existir o arquivo Dados/POO_Audiencia.csv
+     * Em caso de não encontrar o arquivo, o metodo informa na tela e encerra a inicialização do sistema
+     */
+    private static void carregaAudiencia(){
         try{
             ArrayList <String[]> lista = FormataArquivos.listaDadosArquivo("Dados/POO_Audiencia.csv");
             for(String[] linha:lista){
@@ -36,8 +41,36 @@ public class App {
         catch (FileNotFoundException ex){
             System.out.println("Arquivo não encontrado.");
         }
+        catch (ArrayIndexOutOfBoundsException ex){
+            System.out.println("Formato do arquivo de Audiencia invalido.");
+        }
     }
 
+    /**
+     * Carrega todas as Filmes no sistema se existir o arquivo Dados/POO_Filmes.csv
+     * Em caso de não encontrar o arquivo, o metodo informa na tela e encerra a inicialização do sistema
+     */
+    private static void carregaFilmes() {
+        try{
+            ArrayList <String[]> lista = FormataArquivos.listaDadosArquivo("Dados/POO_Filmes.csv");
+            for(String[] linha:lista){
+                int duracaoFilme = Integer.parseInt(linha[3]);
+                FilmeLonga serie = new FilmeLonga(linha[0], linha[1], "en", " ", linha[2], duracaoFilme);
+                plataforma.adicionarMidia(linha[0],serie);
+            }
+        }
+        catch (FileNotFoundException ex){
+            System.out.println("Arquivo não encontrado.");
+        }
+        catch (NumberFormatException | ArrayIndexOutOfBoundsException ex){
+            System.out.println("Formato do arquivo de Filmes invalido.");
+        }
+    }
+
+    /**
+     * Carrega todas as Series no sistema se existir o arquivo Dados/POO_Series.csv
+     * Em caso de não encontrar o arquivo, o metodo informa na tela e encerra a inicialização do sistema
+     */
     private static void carregaSeries() {
         try{
             ArrayList <String[]> lista = FormataArquivos.listaDadosArquivo("Dados/POO_Series.csv");
@@ -49,10 +82,14 @@ public class App {
         catch (FileNotFoundException ex){
             System.out.println("Arquivo não encontrado.");
         }
+        catch (ArrayIndexOutOfBoundsException ex){
+            System.out.println("Formato do arquivo de Serie invalido.");
+        }
     }
 
     /**
      * Carrega todos os Cliente no sistema se existir o arquivo Dados/POO_Espectadores.csv
+     * Em caso de não encontrar o arquivo, o metodo informa na tela e encerra a inicialização do sistema
      */
     private static void carregaCliente() {
         try{
@@ -64,6 +101,9 @@ public class App {
         }
         catch(FileNotFoundException e){
             System.out.println("Arquivo não encontrado.");
+        }
+        catch (ArrayIndexOutOfBoundsException ex){
+            System.out.println("Formato do arquivo de Cliente invalido.");
         }
     }
 }
