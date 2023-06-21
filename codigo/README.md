@@ -8,3 +8,6 @@ Contém as classes da aplicação.
 
 ## Tests
 Contém os testes de unidade das classes.
+
+## Utilidades
+Contém classes de auxílio e run time exceptions personalizadas.
