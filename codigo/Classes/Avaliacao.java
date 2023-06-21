@@ -9,6 +9,7 @@ public class Avaliacao {
         validarNota(nota);
         this.nota = nota;
         this.cliente = cliente;
+		cliente.registrarAvaliacao();
     }
 	
 	private void validarNota(int nota) {

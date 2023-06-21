@@ -9,6 +9,7 @@ public class Cliente {
     private String nomeCliente;
     private HashSet<Midia> tableMidiasFuturas = new HashSet<>();
     private HashSet<Midia> tableMidiasAssistidas = new HashSet<>();
+    private int quantidadeAvaliacoesTotal;
 
     /**
      * Cria o Objeto Cliente recebendo os dados do usuario.
@@ -39,6 +40,7 @@ public class Cliente {
         }
 
         this.nomeCliente = nomeCliente;
+        this.quantidadeAvaliacoesTotal = 0;
     }
 
     /**
@@ -67,15 +69,14 @@ public class Cliente {
     public void adicionarTableMidiasAssistidas(Midia midia) {
         tableMidiasAssistidas.add(midia);
     }
-    
-    /**
-     * Chama o metodo de avaliar media da classe Media
-     */
-    public void adicionarAvaliacao(Midia midia, Avaliacao avaliacao){
-        midia.adicionarAvaliacao(avaliacao);
+
+    public void registrarAvaliacao(){
+        quantidadeAvaliacoesTotal++;
     }
 
-
+    public int getQuantidadeAvaliacoesTotal(){
+        return this.quantidadeAvaliacoesTotal;
+    }
    
 
     public String getLoginCliente() {
@@ -88,6 +89,10 @@ public class Cliente {
 
     public String getNomeCliente() {
         return nomeCliente;
+    }
+
+    public int qtdeMidiasAssistidas(){
+        return tableMidiasAssistidas.size();
     }
 
 }
