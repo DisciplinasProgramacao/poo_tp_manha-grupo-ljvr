@@ -1,6 +1,7 @@
 package Classes;
 
 import java.util.HashMap;
+import java.util.Map;
 
 // TO DO: rever funcionamento da classe antes da implementação final e remover code smell antes de publicar o app
 
@@ -95,6 +96,31 @@ public class Plataforma {
 		tableMidiasGerais.put(id, novaMidia);
 	}
 	
-	
+	/// Relatorios
+
+	public String relatorioClienteMaisMidias(){
+		Cliente  cliente = tableClientes.values().stream()
+										.max((c1,c2) -> (c1.qtdeMidiasAssistidas()>c2.qtdeMidiasAssistidas()) ?1:-1).get();
+
+		return "O cliente com mais midias assistidas é o " + cliente.getNomeCliente() + " com " + cliente.qtdeMidiasAssistidas() +
+		" midias assistidas.";
+	}
+
+	public String relatorioClienteMaisAvaliacoes(){
+		Cliente  cliente = tableClientes.values().stream()
+										.max((c1,c2) -> (c1.getQuantidadeAvaliacoesTotal()>c2.getQuantidadeAvaliacoesTotal()) ?1:-1).get();
+
+		return "O cliente com mais midias avaliadas é o " + cliente.getNomeCliente() + " com " + cliente.getQuantidadeAvaliacoesTotal() +
+		" midias avaliadas.";
+	}
+
+	public String relatorioPorcentagemClientes15Avaliacoes(){
+		double  qtdeCliente15Avaliacoes = tableClientes.values().stream()
+										.filter(c -> c.getQuantidadeAvaliacoesTotal()>=15)
+										.count();
+		double porcentagem = Double.parseDouble(String.format("%.3f",(qtdeCliente15Avaliacoes / tableClientes.size()) *100).replace(",","."));
+		return "A porcentagem de midias que tem mais de 15 avaliaçõe é: " + porcentagem + "%";
+	}
+
 
 }
