@@ -1,7 +1,7 @@
 package Classes;
 
 import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 // TO DO: rever funcionamento da classe antes da implementação final e remover code smell antes de publicar o app
 
@@ -10,7 +10,6 @@ public class Plataforma {
 	// atributos
 	private HashMap<String, Midia> tableMidiasGerais;
 	private HashMap<String, Cliente> tableClientes;
-	private Cliente usuarioAtual;
 
 	/**
 	 * O construtor da classe Pataforma
@@ -27,33 +26,11 @@ public class Plataforma {
 	public Plataforma() {
 		tableMidiasGerais = new HashMap<String, Midia>();
 		tableClientes = new HashMap<String, Cliente>();
-		usuarioAtual = null;
 	}
 
 	// metodo de login
 	// TO DO: rever funcionamento do metodo fazerLogin
 
-	/**
-	 * O metodo fazerLogin recebe como parametros o e-mail e a senha do cliente e
-	 * realiza a validacao do login. Caso o e-mail esteja na tabela hash
-	 * tableClientes e a senha seja valida, o metodo define o cliente
-	 * correspondente
-	 * como usuarioAtual e retorna true. Caso contrario, o metodo retorna false
-	 *
-	 * @param email
-	 * @param senha
-	 * @return
-	 */
-	public boolean fazerLogin(String email, String senha) {
-		if (tableClientes.containsKey(email)) {
-			Cliente cliente = tableClientes.get(email);
-			if (cliente.getSenhaCliente() == senha.hashCode()) {
-				this.usuarioAtual = cliente;
-				return true;
-			}
-		}
-		return false;
-	}
 
 	// metodos de acesso
 
@@ -96,8 +73,12 @@ public class Plataforma {
 		tableMidiasGerais.put(id, novaMidia);
 	}
 	
-	/// Relatorios
+	// #####Relatorios
 
+	/**
+	 * Relatorio que retorna o nome do usuario com maior número de midias assistidas.
+	 * @return Retorna uma String com o nome um texto padrão, contendo o nome do usuario e a quantidade de midias assistidas.
+	 */
 	public String relatorioClienteMaisMidias(){
 		Cliente  cliente = tableClientes.values().stream()
 										.max((c1,c2) -> (c1.qtdeMidiasAssistidas()>c2.qtdeMidiasAssistidas()) ?1:-1).get();
@@ -113,13 +94,56 @@ public class Plataforma {
 		return "O cliente com mais midias avaliadas é o " + cliente.getNomeCliente() + " com " + cliente.getQuantidadeAvaliacoesTotal() +
 		" midias avaliadas.";
 	}
-
+	/**
+	 * Retorna a porcentagem de usuarios que tem pelo menos 15 avaliações na plataforma.
+	 * @return Retorna uma String com o nome um texto padrão, com a informação da porcentagem.
+	 */
 	public String relatorioPorcentagemClientes15Avaliacoes(){
 		double  qtdeCliente15Avaliacoes = tableClientes.values().stream()
 										.filter(c -> c.getQuantidadeAvaliacoesTotal()>=15)
 										.count();
 		double porcentagem = Double.parseDouble(String.format("%.3f",(qtdeCliente15Avaliacoes / tableClientes.size()) *100).replace(",","."));
 		return "A porcentagem de midias que tem mais de 15 avaliaçõe é: " + porcentagem + "%";
+	}
+
+	/**
+	 * Gera relatorio com a lista das 10 midias mais bem avaliadas, que foram assistidas ao menos 100 vezes.
+	 * @return String com a lista de midias.
+	 * @throws ArrayIndexOutOfBoundsException Retonra exceção caso a quantidade de midias assistidas mais de 100 vezes seja menor que 10.
+	 */
+	public String relatorioTop10MidiasAvaliacao()throws ArrayIndexOutOfBoundsException{
+		List<Midia> listaOrdenada = tableMidiasGerais.values().stream()
+									.filter(c-> c.getVisualizacoesMidia()>=100)
+									.sorted((c1,c2)-> (c1.calcularMediaAvaliacoes()<c2.calcularMediaAvaliacoes())?1:-1)
+									.toList();
+
+		StringBuilder report = new StringBuilder("=== LISTA DAS 10 MIDIAS MAIS BEM AVALIADAS ===\n");
+
+		for (int i = 0 ; i<10;i++){
+			report.append("" + (i+1) +" - " + listaOrdenada.get(i).getNomeMidia() + "\n");
+		}
+
+		return report.toString();
+		
+	}
+	/**
+	 * Gera relatorio com a lista das 10 midias mais assistidas.
+	 * @return String com a lista de midias.
+	 * @throws ArrayIndexOutOfBoundsException Retonra exceção caso a quantidade de midias seja menor que 10.
+	 */
+	public String relatorioTop10MidiasVisualizacao()throws ArrayIndexOutOfBoundsException{
+		List<Midia> listaOrdenada = tableMidiasGerais.values().stream()
+									.sorted((c1,c2)-> (c1.getVisualizacoesMidia()<c2.getVisualizacoesMidia())?1:-1)
+									.toList();
+
+		StringBuilder report = new StringBuilder("=== LISTA DAS 10 MIDIAS MAIS ASSISTIDAS ===\n");
+
+		for (int i = 0 ; i<10;i++){
+			report.append("" + (i+1) +" - " + listaOrdenada.get(i).getNomeMidia() + "\n");
+		}
+
+		return report.toString();
+		
 	}
 
 
