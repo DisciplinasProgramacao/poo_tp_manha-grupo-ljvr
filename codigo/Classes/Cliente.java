@@ -30,13 +30,13 @@ public class Cliente {
         if (loginCliente.isEmpty()) {
             this.loginCliente = loginCliente;
         } else {
-            this.loginCliente = loginCliente;
+            throw new ExceptionInInitializerError("Login em branco");
         }
 
         if (loginCliente.isEmpty()) {
             this.senhaCliente = senhaCliente;
         } else {
-            this.senhaCliente = senhaCliente;
+            throw new ExceptionInInitializerError("Senha em branco");
         }
 
         this.nomeCliente = nomeCliente;
