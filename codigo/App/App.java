@@ -299,7 +299,6 @@ public class App {
             System.out.println("Filme criado com sucesso!");
             return new FilmeLonga(id, nome, idioma, genero, dataLancamento, duracaoMin);
         }
-
     }
 
     // #endregion
