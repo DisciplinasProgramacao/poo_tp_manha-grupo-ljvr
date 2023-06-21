@@ -12,10 +12,9 @@ Atualizado em 18/06/2023
 | 5. Implementação da lógica de carga de dados do catálogo de filmes |  Rafael ✔️ | 
 | 6. Implementação do sistema de avaliação de mídias: uma mídia tem sua avaliação média |  Janaina ✔️ | 
 | 7. Um cliente não pode avaliar a mesma mídia duas vezes |  Janaina ✔️ | 
-| 9. Garantir a robustez do sistema principal |  Luiz ✔️ ➕➖ | 
-| 3. Implementação do cadastro de clientes, filmes e séries |  Luiz ✔️ | 
-| 4. Salvar dados de clientes, filmes e séries |   Luiz ✔️ | 
-| 8. Implementação do protótipo de sistema cobrindo os requisitos | Luiz ✔️ | 
+| 8. Garantir a robustez do sistema principal |  Luiz ✔️ ➕➖ | 
+| 9. Implementação do cadastro de clientes, filmes e séries |  Luiz ✔️ | 
+| 10. Implementação do protótipo de sistema cobrindo os requisitos | Luiz ✔️ | 
 
 ----
 
@@ -23,6 +22,7 @@ Atualizado em 18/06/2023
 
 | Tarefa      | Responsável |
 | ----------- | ----------- |
-| 7. Clientes podem ser regulares ou especialistas, e estes últimos podem adicionar comentários à avaliação |  ❌ | 
+| 1. Salvar dados de clientes, filmes e séries |   Luiz ❌ | 
+| 2. Clientes podem ser regulares ou especialistas, e estes últimos podem adicionar comentários à avaliação |  ❌ | 
 
 <!-- icons ➕➖ ✔️ ❌-->

@@ -8,7 +8,6 @@ import Classes.FilmeLonga;
 import Classes.Midia;
 import Classes.Plataforma;
 import Classes.Serie;
-import Utilidades.FormataArquivos;
 
 public class App {
 
@@ -19,6 +18,7 @@ public class App {
     public static void main(String[] args) {
 
         limparTela();
+        carregaDadosIniciais();
 
         try {
 
@@ -192,19 +192,38 @@ public class App {
                 case 3:
                     System.out.println(plataforma.relatorioPorcentagemClientes15Avaliacoes());
                     break;
+                case 4:
+                    try{
+                        System.out.println(plataforma.relatorioTop10MidiasAvaliacao());
+                    }
+                    catch (ArrayIndexOutOfBoundsException ex){
+                        System.out.println("Não foi possivel gerar o relatório pois menos de 10 midias foram reproduzidas mais de 100 vezes.");
+                    }
+                    break;
+                case 5:
+                    System.out.println(plataforma.relatorioTop10MidiasVisualizacao());
+                    break;
+                case 0:
+                    break;
                 default:
                     System.out.println("Nenhuma opção valida!");
             }
+            espera();
 
         } while (opcao != 0);
     }
 
     public static int menuPrincialAdm() {
-        System.out.println("=====Bem vindo ADM=====");
+        System.out.println("=====Bem vindo aos Relatórios=====");
         System.out.println("  Area de relatorios ");
         System.out.println("1 - Cliente com mais midias assistidas");
         System.out.println("2 - Cliente com mais midias avaliadas");
-        System.out.println("3 - porcentagem de midias que tem mais de 15 avaliacoes");
+        System.out.println("3 - Porcentagem de midias que tem mais de 15 avaliacoes");
+        System.out.println("4 - TOP10 Midias mais bem avaliadas");
+        System.out.println("5 - TOP10 Midias mais assistidas");
+        System.out.println("0 - Sair");
+
+
         System.out.println("=======================");
         return Integer.parseInt(teclado.nextLine());
     }
@@ -215,8 +234,8 @@ public class App {
     public static int menuPlataforma() {
         System.out.println("=====Bem vindo=====");
         System.out.println("Insira:");
-        System.out.println("1 - Usuario comum");
-        System.out.println("2 - Usuario administrador");
+        System.out.println("1 - Plataforma Stream");
+        System.out.println("2 - Relatórios");
         return Integer.parseInt(teclado.nextLine());
     }
 
