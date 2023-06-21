@@ -89,7 +89,7 @@ public abstract class Midia {
      * @param cliente O cliente que realiza a avaliação.
      * @param avaliacao    A avaliacao a ser atribuida a midia (entre 1 e 5).
      */
-    public void adicionarAvaliacao(Avaliacao avaliacao) {
+    public void adicionarAvaliacao(Avaliacao avaliacao) throws IllegalStateException {
         if (avaliacoes.containsKey(avaliacao.getCliente())) {
             throw new IllegalStateException("O cliente ja avaliou esta media.");
         }

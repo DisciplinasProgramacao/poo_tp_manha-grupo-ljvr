@@ -68,24 +68,37 @@ public class App {
                                     break;
                                 case 2: // add midia
                                     limparTela();
-                                    verificaMidia(midiaSelecionada);
-                                    System.out.println("Midia adicionada com sucesso para assistir mais tarde");
-                                    usuarioLogado.adicionarTableMidiasAssistidas(midiaSelecionada);
+                                    if (verificaMidia(midiaSelecionada)){
+                                        System.out.println("Midia adicionada com sucesso para assistir mais tarde");
+                                        usuarioLogado.adicionarTableMidiasAssistidas(midiaSelecionada);
+                                    }
                                     espera();
                                     break;
                                 case 3: // add midia assistida
                                     limparTela();
-                                    verificaMidia(midiaSelecionada);
-                                    System.out.println("Midia adiciona com sucesso em ja assistidas");
+                                    if(verificaMidia(midiaSelecionada)){
+                                        usuarioLogado.adicionarTableMidiasAssistidas(midiaSelecionada);
+                                        System.out.println("Midia adiciona com sucesso em ja assistidas");
+                                    }
                                     espera();
-                                    usuarioLogado.adicionarTableMidiasAssistidas(midiaSelecionada);
                                     break;
                                 case 4: // avalia midia
-                                    verificaMidia(midiaSelecionada);
-                                    System.out.println("Qual a nota da avaliacao? (1 - 5)");
-                                    int nota = Integer.parseInt(teclado.nextLine());
-                                    midiaSelecionada.adicionarAvaliacao(new Avaliacao(nota, usuarioLogado));
-                                    System.out.println("Avaliação feita com sucesso!");
+                                    if(verificaMidia(midiaSelecionada)){
+                                        System.out.println("Qual a nota da avaliacao? (1 - 5)");
+                                        int nota = Integer.parseInt(teclado.nextLine());
+                                        try{
+                                            midiaSelecionada.adicionarAvaliacao(new Avaliacao(nota, usuarioLogado));
+                                            System.out.println("Avaliação feita com sucesso!");
+                                        }
+                                        catch(IllegalStateException ex){
+                                            System.out.println("O usuario já avaliou essa midia.");
+                                        }
+                                    }
+                                    espera();
+                                    break;
+                                case 5:
+                                    Midia novaMidia = menuNovaMidia();
+                                    plataforma.adicionarMidia(novaMidia.getIdMidia(), novaMidia);
                                     break;
                                 case 0:
                                     resposta = false;
@@ -166,6 +179,8 @@ public class App {
         System.out.println("1 - Selecionar midia");
         System.out.println("2 - Adicionar midia em \"assistir mais tarde\"");
         System.out.println("3 - Adicionar midias em \"ja assistidas manualmente\"");
+        System.out.println("4 - Avaliar midia");
+        System.out.println("5 - Adicionar midia");
         System.out.println("0 - Sair da conta");
 
         return Integer.parseInt(teclado.nextLine());
@@ -176,12 +191,17 @@ public class App {
         return plataforma.encontrarMidia(teclado.nextLine());
     }
 
-    public static void verificaMidia(Midia midia) {
+    public static boolean verificaMidia(Midia midia) {
         limparTela();
         if (midia == null) {
             System.out.println("Midia invalida, selecione uma midia nas opcoes anteriores antes de prosseguir! ");
             espera();
+            return false;
         }
+        else{
+            return true;
+        }
+        
     }
 
     // #endregion
@@ -196,19 +216,15 @@ public class App {
 
             switch (opcao) {
                 case 1:
-                    Midia novaMidia = menuNovaMidia();
-                    plataforma.adicionarMidia(novaMidia.getIdMidia(), novaMidia);
-                    break;
-                case 2:
                     System.out.println(plataforma.relatorioClienteMaisMidias());
                     break;
-                case 3:
+                case 2:
                     System.out.println(plataforma.relatorioClienteMaisAvaliacoes());
                     break;
-                case 4:
+                case 3:
                     System.out.println(plataforma.relatorioPorcentagemClientes15Avaliacoes());
                     break;
-                case 5:
+                case 4:
                     try {
                         System.out.println(plataforma.relatorioTop10MidiasAvaliacao());
                     } catch (ArrayIndexOutOfBoundsException ex) {
@@ -216,7 +232,7 @@ public class App {
                                 "Não foi possivel gerar o relatório pois menos de 10 midias foram reproduzidas mais de 100 vezes.");
                     }
                     break;
-                case 6:
+                case 5:
                     System.out.println(plataforma.relatorioTop10MidiasVisualizacao());
                     break;
                 case 0:
@@ -232,12 +248,11 @@ public class App {
     public static int menuPrincialAdm() {
         System.out.println("=====Bem vindo aos Relatórios=====");
         System.out.println("  Area de relatorios ");
-        System.out.println("1 - Adicionar midia");
-        System.out.println("2 - Cliente com mais midias assistidas");
-        System.out.println("3 - Cliente com mais midias avaliadas");
-        System.out.println("4 - Porcentagem de midias que tem mais de 15 avaliacoes");
-        System.out.println("5 - TOP10 Midias mais bem avaliadas");
-        System.out.println("6 - TOP10 Midias mais assistidas");
+        System.out.println("1 - Cliente com mais midias assistidas");
+        System.out.println("2 - Cliente com mais midias avaliadas");
+        System.out.println("3 - Porcentagem de midias que tem mais de 15 avaliacoes");
+        System.out.println("4 - TOP10 Midias mais bem avaliadas");
+        System.out.println("5 - TOP10 Midias mais assistidas");
         System.out.println("0 - Sair");
 
         System.out.println("=======================");
