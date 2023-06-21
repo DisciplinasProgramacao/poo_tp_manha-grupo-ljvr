@@ -1,8 +1,9 @@
 package Classes;
 
+import java.io.Serializable;
 import java.util.HashSet;
 
-public class Cliente {
+public class Cliente implements Serializable{
 
     private String loginCliente;
     private String senhaCliente;
@@ -68,6 +69,7 @@ public class Cliente {
      */
     public void adicionarTableMidiasAssistidas(Midia midia) {
         tableMidiasAssistidas.add(midia);
+        midia.registrarVisualizacao();
     }
 
     public void registrarAvaliacao(){

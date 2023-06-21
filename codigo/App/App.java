@@ -1,4 +1,9 @@
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -19,8 +24,8 @@ public class App {
     public static void main(String[] args) {
 
         limparTela();
-        carregaDadosIniciais();
-
+        //carregaDadosIniciais(); //Carrega os dados inciais do arquivos
+        carregaDados();
         try {
             if (menuPlataforma() == 1)
                 areaDoUsuario();
@@ -32,6 +37,38 @@ public class App {
             System.out.println("Caractere invalido!");
         }
         //carregaDadosIniciais();
+
+        salvaDados();
+    }
+
+    private static void carregaDados() {
+        try{
+            FileInputStream arquivo = new FileInputStream("Dados/POO_Plataforma.bin");
+            ObjectInputStream dados = new ObjectInputStream(arquivo);
+            plataforma = (Plataforma)dados.readObject();
+            System.out.println("\nDados salvos com sucesso.");
+        }
+        catch (FileNotFoundException ex){
+            System.out.println("Não foi encontrado o arquivo de dados POO_Plataforma.bin");
+        }
+        catch(IOException | ClassNotFoundException ex){
+            System.out.println("O objeto não foi encontrado no arquivo.");
+        }
+    }
+
+    private static void salvaDados() {
+        try{
+            FileOutputStream arquivo = new FileOutputStream("Dados/POO_Plataforma.bin", false);
+            ObjectOutputStream dados = new ObjectOutputStream(arquivo);
+            dados.writeObject(plataforma);
+            System.out.println("\nDados salvos com sucesso.");
+        }
+        catch (FileNotFoundException ex){
+            System.out.println("Não foi possivel salvar o arquivo de dados POO_Plataforma.bin");
+        }
+        catch(IOException ex){
+            System.out.println("O objeto para salvar é nulo. Processo interrompido.");
+        }
     }
 
     // #region area USUARIO

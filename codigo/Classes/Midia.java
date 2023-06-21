@@ -1,10 +1,11 @@
 package Classes;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public abstract class Midia {
+public abstract class Midia implements Serializable {
 
     // atributos
     private String idMidia;

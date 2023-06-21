@@ -15,6 +15,7 @@ Atualizado em 18/06/2023
 | 8. Garantir a robustez do sistema principal |  Luiz ✔️ ➕➖ | 
 | 9. Implementação do cadastro de clientes, filmes e séries |  Luiz ✔️ | 
 | 10. Implementação do protótipo de sistema cobrindo os requisitos | Luiz ✔️ | 
+| 11. Salvar dados de clientes, filmes e séries |   Rafael ✔️ | 
 
 ----
 
@@ -22,7 +23,6 @@ Atualizado em 18/06/2023
 
 | Tarefa      | Responsável |
 | ----------- | ----------- |
-| 1. Salvar dados de clientes, filmes e séries |   Luiz ❌ | 
-| 2. Clientes podem ser regulares ou especialistas, e estes últimos podem adicionar comentários à avaliação |  ❌ | 
+| 1. Clientes podem ser regulares ou especialistas, e estes últimos podem adicionar comentários à avaliação |  ❌ | 
 
 <!-- icons ➕➖ ✔️ ❌-->

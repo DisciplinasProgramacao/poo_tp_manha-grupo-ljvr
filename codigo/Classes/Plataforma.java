@@ -1,11 +1,12 @@
 package Classes;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
 // TO DO: rever funcionamento da classe antes da implementação final e remover code smell antes de publicar o app
 
-public class Plataforma {
+public class Plataforma implements Serializable{
 
 	// atributos
 	private HashMap<String, Midia> tableMidiasGerais;
