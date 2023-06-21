@@ -31,7 +31,7 @@ public class App {
             limparTela();
             System.out.println("Caractere invalido!");
         }
-        carregaDadosIniciais();
+        //carregaDadosIniciais();
     }
 
     // #region area USUARIO

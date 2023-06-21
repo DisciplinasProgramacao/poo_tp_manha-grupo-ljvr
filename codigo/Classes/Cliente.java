@@ -27,13 +27,13 @@ public class Cliente {
     // TO DO: verificacoes de inicializacao
     private void inicializar(String nomeCliente, String loginCliente, String senhaCliente) {
 
-        if (loginCliente.isEmpty()) {
+        if (!loginCliente.isEmpty()) {
             this.loginCliente = loginCliente;
         } else {
             throw new ExceptionInInitializerError("Login em branco");
         }
 
-        if (loginCliente.isEmpty()) {
+        if (!senhaCliente.isEmpty()) {
             this.senhaCliente = senhaCliente;
         } else {
             throw new ExceptionInInitializerError("Senha em branco");
