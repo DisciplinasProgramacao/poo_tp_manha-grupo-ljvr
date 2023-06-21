@@ -3,7 +3,7 @@ package Classes;
 public class Avaliacao {
 	private int nota;
 	private Cliente cliente;
-	private final int NOTAMAXINA = 5;
+	private final int NOTAMAXIMA = 5;
 
 	public Avaliacao(int nota, Cliente cliente) {
         validarNota(nota);
@@ -13,8 +13,8 @@ public class Avaliacao {
     }
 	
 	private void validarNota(int nota) {
-        if (nota < 1 || nota > NOTAMAXINA) {
-            throw new IllegalArgumentException("A nota deve estar entre 1 e " + NOTAMAXINA);
+        if (nota < 1 || nota > NOTAMAXIMA) {
+            throw new IllegalArgumentException("A nota deve estar entre 1 e " + NOTAMAXIMA);
         }
     }	
 
