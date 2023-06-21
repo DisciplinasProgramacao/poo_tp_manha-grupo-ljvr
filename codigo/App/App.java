@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import Classes.Cliente;
@@ -7,37 +8,81 @@ import Classes.FilmeLonga;
 import Classes.Midia;
 import Classes.Plataforma;
 import Classes.Serie;
+import Utilidades.FormataArquivos;
 
 public class App {
 
-    public static Plataforma plataforma = new Plataforma();
+    private static Plataforma plataforma = new Plataforma();
 
-    static Scanner teclado = new Scanner(System.in);
+    private static Scanner teclado = new Scanner(System.in);
 
     public static void main(String[] args) {
 
-        // variaveis da main
-        Cliente clienteAtual;
+        limparTela();
+
+        try {
+
+            if (menuPlataforma() == 1)
+                areaDoUsuario();
+            else
+                areaDaAdm();
+
+        } catch (NumberFormatException | InputMismatchException error) {
+            limparTela();
+            System.out.println("Caractere invalido!");
+        }
+        carregaDadosIniciais();
+    }
+
+    // #region area USUARIO
+    public static void areaDoUsuario() {
+
         int opcao = -1;
 
         do {
+            Midia midiaSelecionada = null;
+            limparTela();
+            boolean resposta = true;
             try {
-                opcao = menuPrincipalPlataforma();
+                opcao = menuPrincipalPlataformaUsuario();
 
                 switch (opcao) {
-                    case 1:
+                    case 1: // login
                         Cliente usuarioLogado = menuLoginCliente();
                         if (usuarioLogado == null)
                             throw new UsuarioNaoEncontradoException("Usuario nao encontrado!");
-                        else
-                            System.out.println("AQUI ACHOU O USUARIO, FALTA MANUSEAR!!");
-                    case 2:
-                        System.out.println("Vai mostrar catalogo");
-                        System.out.println("Vai mostrar catalogo");
-                        System.out.println("Vai mostrar catalogo");
+                        do {
+                            switch (menuUsuarioLogado()) {
+                                case 1: // procurar midia
+                                    midiaSelecionada = menuProcurarMidia();
+                                    if (midiaSelecionada == null) {
+                                        limparTela();
+                                        System.out.println("A midia seleciona não foi achada ou e invalida!");
+                                        espera();
+                                    }
+                                    break;
+                                case 2: // add midia
+                                    verificaMidia(midiaSelecionada);
+                                    System.out.println("Midia adicionada com sucesso para assistir mais tarde");
+                                    usuarioLogado.adicionarTableMidiasAssistidas(midiaSelecionada);
+                                    break;
+                                case 3: // add midia assistida
+                                    verificaMidia(midiaSelecionada);
+                                    System.out.println("Midia adiciona com sucesso em ja assistidas");
+                                    usuarioLogado.adicionarTableMidiasAssistidas(midiaSelecionada);
+                                    break;
+                                case 0:
+                                    resposta = false;
+                                    break;
+                                default:
+                                    System.out.println("Opcao invalida");
+                            }
+                        } while (resposta);
+                        break;
+                    case 2: // mostrar catalogo
                         System.out.println("Vai mostrar catalogo");
                         break;
-                    case 3:
+                    case 3: // criar conta
                         Cliente clienteCriado = menuCriacaoDeCliente();
                         plataforma.adicionarCliente(clienteCriado);
                         break;
@@ -52,7 +97,7 @@ public class App {
                             break;
                         }
                 }
-            } catch (NumberFormatException erro) {
+            } catch (NumberFormatException | InputMismatchException erro) {
                 limparTela();
                 System.out.println("Caractere invalido!");
                 espera();
@@ -63,11 +108,9 @@ public class App {
             }
 
         } while (opcao != 0);
-
-        carregaDadosIniciais();
     }
 
-    public static int menuPrincipalPlataforma() {
+    public static int menuPrincipalPlataformaUsuario() {
         System.out.println("=====Menu inicial=====");
         System.out.println("1 - Login");
         System.out.println("2 - Mostrar catalogo");
@@ -100,10 +143,81 @@ public class App {
         System.out.println("Digite seu login");
         String login = teclado.nextLine();
         System.out.println("Digite sua senha");
-        String senha = teclado.nextLine(); // ainda sem verificacao com senha <- lembrar disso
+        String senha = teclado.nextLine();
         System.out.println("===========================");
 
         return plataforma.encontrarCliente(login);
+    }
+
+    public static int menuUsuarioLogado() {
+        System.out.println("Selecione a opção:");
+        System.out.println("1 - Selecionar midia");
+        System.out.println("2 - Adicionar midia em \"assistir mais tarde\"");
+        System.out.println("3 - Adicionar midias em \"ja assistidas manualmente\"");
+        System.out.println("0 - Sair da conta");
+
+        return Integer.parseInt(teclado.nextLine());
+    }
+
+    public static Midia menuProcurarMidia() {
+        System.out.println("Digite o id da midia que deseja selecionar:");
+        return plataforma.encontrarMidia(teclado.nextLine());
+    }
+
+    public static void verificaMidia(Midia midia) {
+        limparTela();
+        if (midia == null) {
+            System.out.println("Midia invalida, selecione uma midia nas opcoes anteriores! ");
+        }
+        espera();
+    }
+
+    // #endregion
+    // #region Area ADM
+    public static void areaDaAdm() {
+
+        int opcao = -1;
+
+        do {
+            limparTela();
+            opcao = menuPrincialAdm();
+
+            switch (opcao) {
+                case 1:
+                    System.out.println(plataforma.relatorioClienteMaisMidias());
+                    break;
+                case 2:
+                    System.out.println(plataforma.relatorioClienteMaisAvaliacoes());
+                    break;
+                case 3:
+                    System.out.println(plataforma.relatorioPorcentagemClientes15Avaliacoes());
+                    break;
+                default:
+                    System.out.println("Nenhuma opção valida!");
+            }
+
+        } while (opcao != 0);
+    }
+
+    public static int menuPrincialAdm() {
+        System.out.println("=====Bem vindo ADM=====");
+        System.out.println("  Area de relatorios ");
+        System.out.println("1 - Cliente com mais midias assistidas");
+        System.out.println("2 - Cliente com mais midias avaliadas");
+        System.out.println("3 - porcentagem de midias que tem mais de 15 avaliacoes");
+        System.out.println("=======================");
+        return Integer.parseInt(teclado.nextLine());
+    }
+    // #endregion
+
+    // #region metodos do sistema
+
+    public static int menuPlataforma() {
+        System.out.println("=====Bem vindo=====");
+        System.out.println("Insira:");
+        System.out.println("1 - Usuario comum");
+        System.out.println("2 - Usuario administrador");
+        return Integer.parseInt(teclado.nextLine());
     }
 
     /**
@@ -123,7 +237,7 @@ public class App {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
-
+    // #endregion
     // #region carga de dados
 
     private static void carregaDadosIniciais() {
