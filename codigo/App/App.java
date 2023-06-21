@@ -25,34 +25,38 @@ public class App {
 
         limparTela();
         //carregaDadosIniciais(); //Carrega os dados inciais do arquivos
-        carregaDados();
-        try {
+     
+       try {
+            carregaDados();
             if (menuPlataforma() == 1)
                 areaDoUsuario();
             else
                 areaDaAdm();
 
+            salvaDados();
+
         } catch (NumberFormatException | InputMismatchException error) {
             limparTela();
             System.out.println("Caractere invalido!");
         }
-        //carregaDadosIniciais();
+        catch(IOException | ClassNotFoundException ex){
+            System.out.println("Arquivo de dados não encontrado.");
+        }
 
-        salvaDados();
     }
 
-    private static void carregaDados() {
+    private static void carregaDados() throws ClassNotFoundException,FileNotFoundException,IOException{
         try{
             FileInputStream arquivo = new FileInputStream("Dados/POO_Plataforma.bin");
             ObjectInputStream dados = new ObjectInputStream(arquivo);
             plataforma = (Plataforma)dados.readObject();
-            System.out.println("\nDados salvos com sucesso.");
         }
         catch (FileNotFoundException ex){
-            System.out.println("Não foi encontrado o arquivo de dados POO_Plataforma.bin");
+            throw new FileNotFoundException("Não foi encontrado o arquivo de dados POO_Plataforma.bin");
         }
         catch(IOException | ClassNotFoundException ex){
-            System.out.println("O objeto não foi encontrado no arquivo.");
+            throw new ClassNotFoundException("O objeto não foi encontrado no arquivo.");
+
         }
     }
 

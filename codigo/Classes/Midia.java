@@ -15,6 +15,8 @@ public abstract class Midia implements Serializable {
     private String dataLancamentoMidia;
     private int visualizacoesMidia = 0;
     private Map<Cliente, Avaliacao> avaliacoes = new HashMap<>();
+    private static final long serialVersionUID = 1;
+
 
     /**
      * Construtor de midia.

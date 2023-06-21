@@ -11,6 +11,8 @@ public class Cliente implements Serializable{
     private HashSet<Midia> tableMidiasFuturas = new HashSet<>();
     private HashSet<Midia> tableMidiasAssistidas = new HashSet<>();
     private int quantidadeAvaliacoesTotal;
+    private static final long serialVersionUID = 1;
+
 
     /**
      * Cria o Objeto Cliente recebendo os dados do usuario.
@@ -68,8 +70,10 @@ public class Cliente implements Serializable{
      * Adiciona uma midia a lista de midia Assistidas de um cliente especifico.
      */
     public void adicionarTableMidiasAssistidas(Midia midia) {
-        tableMidiasAssistidas.add(midia);
-        midia.registrarVisualizacao();
+        if(!tableMidiasAssistidas.contains(midia)){
+            tableMidiasAssistidas.add(midia);
+            midia.registrarVisualizacao();
+        }
     }
 
     public void registrarAvaliacao(){

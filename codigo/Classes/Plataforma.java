@@ -11,7 +11,7 @@ public class Plataforma implements Serializable{
 	// atributos
 	private HashMap<String, Midia> tableMidiasGerais;
 	private HashMap<String, Cliente> tableClientes;
-
+	private static final long serialVersionUID = 1;
 	/**
 	 * O construtor da classe Pataforma
 	 * 
