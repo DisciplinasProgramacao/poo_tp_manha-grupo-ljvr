@@ -7,10 +7,8 @@ O trabalho será dividido em partes, utilizando cada tema OO aprendido em sala d
 ## Alunos integrantes da equipe
 
 * Luiz Henrique Oliveira de Assis
-* Vinicius Andreata Dumont
 * Janaina Vasconcelos Alves
 * Rafael Lucas Rosa de Oliveira
-* Leandro Carvalho Horta de Araújo
 
 ## Professor responsável
 
