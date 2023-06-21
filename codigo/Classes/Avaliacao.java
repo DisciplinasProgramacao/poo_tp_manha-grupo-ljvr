@@ -16,8 +16,7 @@ public class Avaliacao {
         if (nota < 1 || nota > NOTAMAXINA) {
             throw new IllegalArgumentException("A nota deve estar entre 1 e " + NOTAMAXINA);
         }
-    }
-	
+    }	
 
 	public int getNota() {
 	    return nota;
