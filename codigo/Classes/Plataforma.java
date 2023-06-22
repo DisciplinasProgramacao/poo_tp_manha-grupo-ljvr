@@ -2,7 +2,9 @@ package Classes;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 // TO DO: rever funcionamento da classe antes da implementação final e remover code smell antes de publicar o app
 
@@ -147,5 +149,15 @@ public class Plataforma implements Serializable{
 		
 	}
 
-
+	public String relatorioTodasMidias() throws NoSuchElementException{
+        if(!tableMidiasGerais.isEmpty()){
+            String report = tableMidiasGerais.values().stream()
+                        .map(m -> m.toString())
+                       .reduce((m1,m2)-> m1.concat("\n".concat(m2))).get();
+            return report;
+        }
+        else{
+            throw new NoSuchElementException("Lista de Midias futuras está vazia");
+        }
+    }
 }

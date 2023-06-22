@@ -92,11 +92,16 @@ public abstract class Midia implements Serializable {
      * @param cliente O cliente que realiza a avaliação.
      * @param avaliacao    A avaliacao a ser atribuida a midia (entre 1 e 5).
      */
-    public void adicionarAvaliacao(Avaliacao avaliacao) throws IllegalStateException {
+    public void adicionarAvaliacao(Avaliacao avaliacao) throws IllegalStateException,IllegalAccessError {
         if (avaliacoes.containsKey(avaliacao.getCliente())) {
             throw new IllegalStateException("O cliente ja avaliou esta media.");
         }
-        avaliacoes.put(avaliacao.getCliente(), avaliacao);
+        if (avaliacao.getCliente().verificaSeAssistiuMidia(this)){ 
+            avaliacoes.put(avaliacao.getCliente(), avaliacao);
+        }
+        else{
+            throw new IllegalAccessError("O cliente não assitiu a Midia, não é possível avaliar");
+        }
     }
 
     
@@ -139,5 +144,21 @@ public abstract class Midia implements Serializable {
     public String getDataLancamentoMidia() {
         return dataLancamentoMidia;
     }
+
+    @Override
+	public String toString() {
+	    StringBuilder sb = new StringBuilder();
+	    sb.append("=====================\n");
+        sb.append("ID: '").append(idMidia).append('\'');
+	    sb.append(", Nome: '").append(nomeMidia).append('\'');
+	    sb.append(", Gênero: '").append(generoMidia).append('\'');
+	    sb.append(", Idioma: '").append(idiomaMidia).append('\'');
+	    sb.append(", Data de lançamento: '").append(dataLancamentoMidia).append('\'');
+	    sb.append(", Visualizações: ").append(visualizacoesMidia).append("\n");
+	    sb.append("=====================\n");
+	    return sb.toString();
+	}
+
+    
 
 }

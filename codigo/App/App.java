@@ -25,9 +25,11 @@ public class App {
 
         limparTela();
         //carregaDadosIniciais(); //Carrega os dados inciais do arquivos
-     
+        
        try {
             carregaDados();
+            System.out.println(plataforma.relatorioTodasMidias());
+            
             if (menuPlataforma() == 1)
                 areaDoUsuario();
             else
@@ -131,8 +133,11 @@ public class App {
                                             midiaSelecionada.adicionarAvaliacao(new Avaliacao(nota, usuarioLogado));
                                             System.out.println("Avaliação feita com sucesso!");
                                         }
+                                        catch(IllegalAccessError ex){
+                                            System.out.println(ex.getLocalizedMessage());
+                                        }
                                         catch(IllegalStateException ex){
-                                            System.out.println("O usuario já avaliou essa midia.");
+                                            System.out.println(ex.getMessage());
                                         }
                                     }
                                     espera();

@@ -2,6 +2,7 @@ package Classes;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 
 public class Cliente implements Serializable{
 
@@ -99,6 +100,36 @@ public class Cliente implements Serializable{
 
     public int qtdeMidiasAssistidas(){
         return tableMidiasAssistidas.size();
+    }
+
+    public boolean verificaSeAssistiuMidia(Midia midia){
+        return tableMidiasAssistidas.contains(midia);
+    }
+
+    public String relatorioMidiasAssistidas() throws NoSuchElementException{
+        if(!tableMidiasAssistidas.isEmpty()){
+            String report = geraStringRelatorioMidias(tableMidiasAssistidas);
+            return report;
+        }
+        else{
+            throw new NoSuchElementException("Lista de Midias assistidas está vazia");
+        }
+    }
+
+    public String relatorioMidiasFuturas() throws NoSuchElementException{
+        if(!tableMidiasFuturas.isEmpty()){
+            String report = geraStringRelatorioMidias(tableMidiasFuturas);
+            return report;
+        }
+        else{
+            throw new NoSuchElementException("Lista de Midias futuras está vazia");
+        }
+    }
+
+    private String geraStringRelatorioMidias(HashSet<Midia> lista){
+        return lista.stream()
+                        .map(m -> m.toString())
+                       .reduce((m1,m2)-> m1.concat("\n".concat(m2))).get();
     }
 
 }

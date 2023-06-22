@@ -1,9 +1,13 @@
 package Classes;
 
-public class Avaliacao {
+import java.io.Serializable;
+
+public class Avaliacao implements Serializable{
 	private int nota;
 	private Cliente cliente;
 	private final int NOTAMAXIMA = 5;
+	private static final long serialVersionUID = 1;
+
 
 	public Avaliacao(int nota, Cliente cliente) {
         validarNota(nota);
