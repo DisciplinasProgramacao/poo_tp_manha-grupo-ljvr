@@ -12,9 +12,11 @@ import java.util.Scanner;
 import Classes.Avaliacao;
 import Classes.Cliente;
 import Classes.FilmeLonga;
+import Classes.FiltroMidia;
 import Classes.Midia;
 import Classes.Plataforma;
 import Classes.Serie;
+import Tests.FilmeLongaTest;
 import Utilidades.FormataArquivos;
 import Utilidades.UsuarioNaoEncontradoException;
 
@@ -29,7 +31,8 @@ public class App {
         limparTela();
 
         try {
-            //carregaDadosIniciais();  Para carregar arquivos originais descomentar essa linha e comnetar a linha abaixo.
+            // carregaDadosIniciais(); Para carregar arquivos originais descomentar essa
+            // linha e comnetar a linha abaixo.
             carregaDados();
 
             if (menuPlataforma() == 1)
@@ -57,6 +60,7 @@ public class App {
         do {
             limparTela();
             boolean resposta = true;
+            String op;
             try {
                 opcao = menuPrincipalPlataformaUsuario();
 
@@ -147,6 +151,56 @@ public class App {
                                         espera();
                                     }
                                     break;
+                                case 7:
+                                    try {
+                                        limparTela();
+                                        switch (menuDeFiltros()) {
+                                            case 1: // nome idioma genero
+                                                System.out.println("Digite o nome da midia que deseja procurar:");
+                                                op = teclado.nextLine();
+                                                if (menuDeFiltrosEscolha() == 1) {
+                                                    System.out.println(usuarioLogado.relatorioFiltroFuturassNome(op));
+                                                    espera();
+                                                } else {
+                                                    System.out.println(usuarioLogado.relatorioFiltroAssistidasNome(op));
+                                                    espera();
+                                                }
+                                                break;
+                                            case 2:
+                                                System.out.println("Digite o idioma da midia que deseja procurar");
+                                                op = teclado.nextLine();
+                                                if (menuDeFiltrosEscolha() == 1) {
+                                                    System.out.println(usuarioLogado.relatorioFiltroFuturassIdioma(op));
+                                                    espera();
+                                                } else {
+                                                    System.out
+                                                            .println(usuarioLogado.relatorioFiltroAssistidasIdioma(op));
+                                                    espera();
+                                                }
+                                                break;
+                                            case 3:
+                                                System.out.println("Digite o genero da midia que deseja procurar");
+                                                op = teclado.nextLine();
+                                                if (menuDeFiltrosEscolha() == 1) {
+                                                    System.out
+                                                            .println(usuarioLogado.relatorioFiltroAssistidasGenero(op));
+                                                    espera();
+                                                } else {
+                                                    System.out.println(usuarioLogado.relatorioFiltroFuturassGenero(op));
+                                                    espera();
+                                                }
+                                                break;
+                                            default:
+                                                System.out.println("Opção invalida!");
+                                                espera();
+                                                break;
+                                        }
+                                    } catch (NoSuchElementException err) {
+                                        limparTela();
+                                        System.out.println("Nenhuma midia encontrada!");
+                                        espera();
+                                    }
+                                    break;
                                 case 100:
                                     Midia novaMidia = menuNovaMidia();
                                     plataforma.adicionarMidia(novaMidia.getIdMidia(), novaMidia);
@@ -178,7 +232,9 @@ public class App {
                             break;
                         }
                 }
-            } catch (NumberFormatException | InputMismatchException erro) {
+            } catch (NumberFormatException |
+
+                    InputMismatchException erro) {
                 limparTela();
                 System.out.println("Caractere invalido!");
                 espera();
@@ -189,6 +245,7 @@ public class App {
             }
 
         } while (opcao != 0);
+
     }
 
     public static int menuPrincipalPlataformaUsuario() {
@@ -251,6 +308,7 @@ public class App {
         System.out.println("4 - Avaliar midia");
         System.out.println("5 - Ver lista de assistir mais tarde");
         System.out.println("6 - Ver lista de ja assistidas");
+        System.out.println("7 - Busca filtrada");
         System.out.println("0 - Sair da conta\n");
         System.out.println("=======Para testes=======");
         System.out.println("| 100 - Adicionar midia |");
@@ -276,12 +334,19 @@ public class App {
 
     }
 
+    public static int menuDeFiltrosEscolha() {
+        System.out.println("Em qual lista você quer filtrar? ");
+        System.out.println("1 - Assistir mais tarde");
+        System.out.println("2 - Ja assistidas");
+        return Integer.parseInt(teclado.nextLine());
+    }
+
     // #endregion
     // #region Area ADM
     public static void areaDaAdm() {
 
         int opcao = -1;
-
+        String op;
         do {
             limparTela();
             opcao = menuPrincialAdm();
@@ -307,6 +372,39 @@ public class App {
                 case 5:
                     System.out.println(plataforma.relatorioTop10MidiasVisualizacao());
                     break;
+                case 6:
+                    try {
+                        switch (menuDeFiltros()) {
+                            case 1: // nome idio gen
+                                System.out.println("Digite o nome da midia");
+                                op = teclado.nextLine();
+                                System.out.println(plataforma.relatorioMidiasFiltradasNome(op));
+                                espera();
+                                break;
+                            case 2:
+                                System.out.println("Digite o idioma da midia");
+                                op = teclado.nextLine();
+                                System.out.println(plataforma.relatorioMidiasFiltradasIdioma(op));
+                                espera();
+                                break;
+                            case 3:
+                                System.out.println("Digite o nome da genero");
+                                op = teclado.nextLine();
+                                System.out.println(plataforma.relatorioMidiasFiltradasgenero(op));
+                                espera();
+                                break;
+                            default:
+                                System.out.println("Opcao invalida!");
+                                espera();
+                                break;
+
+                        }
+                    } catch (NoSuchElementException err) {
+                        limparTela();
+                        System.out.println("Nada foi encontrado!");
+                        espera();
+                    }
+                    break;
                 case 0:
                     break;
                 default:
@@ -325,6 +423,7 @@ public class App {
         System.out.println("3 - Porcentagem de midias que tem mais de 15 avaliacoes");
         System.out.println("4 - TOP10 Midias mais bem avaliadas");
         System.out.println("5 - TOP10 Midias mais assistidas");
+        System.out.println("6 - Filtrar midias");
         System.out.println("0 - Sair");
         System.out.println("=======================");
         return Integer.parseInt(teclado.nextLine());
@@ -397,6 +496,14 @@ public class App {
         System.out.println("2 - Relatorios Administrativos");
         System.out.println("======================================");
         System.out.println("\n\nDica: Para uma melhor experiencia deixe o terminal em uma altura grande.");
+        return Integer.parseInt(teclado.nextLine());
+    }
+
+    public static int menuDeFiltros() {
+        System.out.println("Qual seu criterio de filtro?");
+        System.out.println("1 - Nome");
+        System.out.println("2 - Idioma");
+        System.out.println("3 - Genero");
         return Integer.parseInt(teclado.nextLine());
     }
 
