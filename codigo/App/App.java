@@ -129,6 +129,7 @@ public class App {
                                         espera();
                                     } catch (NoSuchElementException err) {
                                         System.out.println("Voce não possui nenhuma midia para assistir mais tarde!");
+                                        espera();
                                         break;
                                     }
                                     break;
@@ -140,6 +141,7 @@ public class App {
                                         espera();
                                     } catch (NoSuchElementException err) {
                                         System.out.println("Voce nao possui midias na lista de ja assistidas");
+                                        espera();
                                     }
                                     break;
                                 case 100:
