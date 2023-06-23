@@ -1,6 +1,7 @@
 package Classes;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -28,6 +29,7 @@ public class Plataforma implements Serializable{
 	public Plataforma() {
 		tableMidiasGerais = new HashMap<String, Midia>();
 		tableClientes = new HashMap<String, Cliente>();
+		
 	}
 
 	// metodo de login
