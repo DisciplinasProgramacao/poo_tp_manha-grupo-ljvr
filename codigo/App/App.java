@@ -232,9 +232,7 @@ public class App {
                             break;
                         }
                 }
-            } catch (NumberFormatException |
-
-                    InputMismatchException erro) {
+            } catch (NumberFormatException | InputMismatchException erro) {
                 limparTela();
                 System.out.println("Caractere invalido!");
                 espera();
