@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import Classes.Avaliacao;
@@ -24,12 +25,10 @@ public class App {
     public static void main(String[] args) {
 
         limparTela();
-        //carregaDadosIniciais(); //Carrega os dados inciais do arquivos
-        
-       try {
+
+        try {
             carregaDados();
-            System.out.println(plataforma.relatorioTodasMidias());
-            
+
             if (menuPlataforma() == 1)
                 areaDoUsuario();
             else
@@ -40,50 +39,19 @@ public class App {
         } catch (NumberFormatException | InputMismatchException error) {
             limparTela();
             System.out.println("Caractere invalido!");
-        }
-        catch(IOException | ClassNotFoundException ex){
+        } catch (IOException | ClassNotFoundException ex) {
             System.out.println("Arquivo de dados não encontrado.");
         }
 
-    }
-
-    private static void carregaDados() throws ClassNotFoundException,FileNotFoundException,IOException{
-        try{
-            FileInputStream arquivo = new FileInputStream("Dados/POO_Plataforma.bin");
-            ObjectInputStream dados = new ObjectInputStream(arquivo);
-            plataforma = (Plataforma)dados.readObject();
-        }
-        catch (FileNotFoundException ex){
-            throw new FileNotFoundException("Não foi encontrado o arquivo de dados POO_Plataforma.bin");
-        }
-        catch(IOException | ClassNotFoundException ex){
-            throw new ClassNotFoundException("O objeto não foi encontrado no arquivo.");
-
-        }
-    }
-
-    private static void salvaDados() {
-        try{
-            FileOutputStream arquivo = new FileOutputStream("Dados/POO_Plataforma.bin", false);
-            ObjectOutputStream dados = new ObjectOutputStream(arquivo);
-            dados.writeObject(plataforma);
-            System.out.println("\nDados salvos com sucesso.");
-        }
-        catch (FileNotFoundException ex){
-            System.out.println("Não foi possivel salvar o arquivo de dados POO_Plataforma.bin");
-        }
-        catch(IOException ex){
-            System.out.println("O objeto para salvar é nulo. Processo interrompido.");
-        }
     }
 
     // #region area USUARIO
     public static void areaDoUsuario() {
 
         int opcao = -1;
+        Midia midiaSelecionada = null;
 
         do {
-            Midia midiaSelecionada = null;
             limparTela();
             boolean resposta = true;
             try {
@@ -95,7 +63,7 @@ public class App {
                         if (usuarioLogado == null)
                             throw new UsuarioNaoEncontradoException("Usuario nao encontrado!");
                         do {
-                            switch (menuUsuarioLogado()) {
+                            switch (menuUsuarioLogado(midiaSelecionada)) {
                                 case 1: // procurar midia
                                     midiaSelecionada = menuProcurarMidia();
                                     limparTela();
@@ -105,44 +73,76 @@ public class App {
                                         espera();
                                     } else {
                                         limparTela();
-                                        System.out.println("Midia encontrada com sucesso e pronto para ser manuseada!");
+                                        System.out.println("Midia: " + midiaSelecionada.getNomeMidia()
+                                                + " pronta para ser manuseada!");
                                         espera();
                                     }
                                     break;
                                 case 2: // add midia
                                     limparTela();
-                                    if (verificaMidia(midiaSelecionada)){
+                                    if (verificaMidia(midiaSelecionada)) {
                                         System.out.println("Midia adicionada com sucesso para assistir mais tarde");
                                         usuarioLogado.adicionarTableMidiasAssistidas(midiaSelecionada);
+                                        midiaSelecionada = null;
                                     }
                                     espera();
                                     break;
                                 case 3: // add midia assistida
                                     limparTela();
-                                    if(verificaMidia(midiaSelecionada)){
-                                        usuarioLogado.adicionarTableMidiasAssistidas(midiaSelecionada);
+                                    if (verificaMidia(midiaSelecionada)) {
                                         System.out.println("Midia adiciona com sucesso em ja assistidas");
+                                        usuarioLogado.adicionarTableMidiasAssistidas(midiaSelecionada);
+                                        midiaSelecionada = null;
                                     }
                                     espera();
                                     break;
                                 case 4: // avalia midia
-                                    if(verificaMidia(midiaSelecionada)){
+                                    if (verificaMidia(midiaSelecionada)) {
+
+                                        if (!usuarioLogado.verificaSeAssistiuMidia(midiaSelecionada)) {
+                                            System.out.println("Voce ainda nao assistiu a midia.");
+                                            System.out.println(
+                                                    "Para avaliar ela deve estar na lista de midias ja assistidas!");
+                                            espera();
+                                            break;
+                                        }
+
                                         System.out.println("Qual a nota da avaliacao? (1 - 5)");
                                         int nota = Integer.parseInt(teclado.nextLine());
-                                        try{
+                                        try {
                                             midiaSelecionada.adicionarAvaliacao(new Avaliacao(nota, usuarioLogado));
                                             System.out.println("Avaliação feita com sucesso!");
-                                        }
-                                        catch(IllegalAccessError ex){
+                                        } catch (IllegalAccessError ex) {
                                             System.out.println(ex.getLocalizedMessage());
-                                        }
-                                        catch(IllegalStateException ex){
+                                        } catch (IllegalStateException ex) {
                                             System.out.println(ex.getMessage());
                                         }
                                     }
                                     espera();
                                     break;
                                 case 5:
+                                    try {
+                                        limparTela();
+                                        System.out.println("Estao em assistir mais tarde as seguintes midias:\n");
+                                        System.out.println(usuarioLogado.relatorioMidiasFuturas());
+                                        espera();
+                                        espera();
+                                    } catch (NoSuchElementException err) {
+                                        System.out.println("Voce não possui nenhuma midia para assistir mais tarde!");
+                                        break;
+                                    }
+                                    break;
+                                case 6:
+                                    try {
+                                        limparTela();
+                                        System.out.println("Estao em ja assistidos as seguintes midias:\n");
+                                        System.out.println(usuarioLogado.relatorioMidiasAssistidas());
+                                        espera();
+                                    } catch (NoSuchElementException err) {
+                                        System.out.println("Voce nao possui midias na lista de ja assistidas");
+                                    }
+                                    break;
+                                case 100:
                                     Midia novaMidia = menuNovaMidia();
                                     plataforma.adicionarMidia(novaMidia.getIdMidia(), novaMidia);
                                     break;
@@ -157,6 +157,10 @@ public class App {
                     case 2: // criar conta
                         Cliente clienteCriado = menuCriacaoDeCliente();
                         plataforma.adicionarCliente(clienteCriado);
+                        break;
+                    case 3:
+                        System.out.println(plataforma.relatorioTodasMidias());
+                        espera();
                         break;
                     default:
                         if (opcao != 0) {
@@ -186,6 +190,7 @@ public class App {
         System.out.println("=====Menu inicial=====");
         System.out.println("1 - Login");
         System.out.println("2 - Criar usuario");
+        System.out.println("3 - Catalogo completo de midias ");
         System.out.println("0 - Sair");
         System.out.println("======================");
         System.out.println("Digite a opção");
@@ -193,7 +198,7 @@ public class App {
     }
 
     public static Cliente menuCriacaoDeCliente() {
-
+        limparTela();
         System.out.println("=====Bem vindo novo cliente=====");
         System.out.println("Insira seu novo login: ");
         String login = teclado.nextLine();
@@ -220,14 +225,31 @@ public class App {
         return plataforma.encontrarCliente(login);
     }
 
-    public static int menuUsuarioLogado() {
+    public static int menuUsuarioLogado(Midia midiaAtual) {
+        limparTela();
+
+        if (midiaAtual != null) {
+            System.out.println("===============================================");
+            System.out.println("A midia selecionada e: " + midiaAtual.getNomeMidia());
+            System.out.println("===============================================");
+        } else {
+            System.out.println("=====================ATENCAO===================");
+            System.out.println("Você não tem nenhuma midia para manuseio.");
+            System.out.println("Selecione a opção 1 para escolher uma midia.");
+            System.out.println("===============================================");
+        }
+
         System.out.println("Selecione a opção:");
         System.out.println("1 - Selecionar midia");
         System.out.println("2 - Adicionar midia em \"assistir mais tarde\"");
-        System.out.println("3 - Adicionar midias em \"ja assistidas manualmente\"");
+        System.out.println("3 - Adicionar midia em \"ja assistidas\"");
         System.out.println("4 - Avaliar midia");
-        System.out.println("5 - Adicionar midia");
-        System.out.println("0 - Sair da conta");
+        System.out.println("5 - Ver lista de assistir mais tarde");
+        System.out.println("6 - Ver lista de ja assistidas");
+        System.out.println("0 - Sair da conta\n");
+        System.out.println("=======Para testes=======");
+        System.out.println("| 100 - Adicionar midia |");
+        System.out.println("=========================");
 
         return Integer.parseInt(teclado.nextLine());
     }
@@ -243,11 +265,10 @@ public class App {
             System.out.println("Midia invalida, selecione uma midia nas opcoes anteriores antes de prosseguir! ");
             espera();
             return false;
-        }
-        else{
+        } else {
             return true;
         }
-        
+
     }
 
     // #endregion
@@ -300,7 +321,6 @@ public class App {
         System.out.println("4 - TOP10 Midias mais bem avaliadas");
         System.out.println("5 - TOP10 Midias mais assistidas");
         System.out.println("0 - Sair");
-
         System.out.println("=======================");
         return Integer.parseInt(teclado.nextLine());
     }
@@ -363,14 +383,15 @@ public class App {
     }
 
     // #endregion
-
     // #region metodos do sistema
 
     public static int menuPlataforma() {
-        System.out.println("=====Bem vindo=====");
-        System.out.println("Insira:");
+        System.out.println("================Bem vindo=============");
+        System.out.println("Qual deseja entrar? Insira o numero:");
         System.out.println("1 - Plataforma Stream");
-        System.out.println("2 - Relatórios");
+        System.out.println("2 - Relatorios Administrativos");
+        System.out.println("======================================");
+        System.out.println("\n\nDica: Para uma melhor experiencia deixe o terminal em uma altura grande.");
         return Integer.parseInt(teclado.nextLine());
     }
 
@@ -393,15 +414,6 @@ public class App {
     }
     // #endregion
     // #region carga de dados
-
-    private static void carregaDadosIniciais() {
-        carregaCliente();
-        carregaFilmes();
-        carregaSeries();
-        carregaAudiencia();
-        System.out.println();
-    }
-
     /**
      * Carrega todos os Cliente no sistema se existir o arquivo
      * Dados/POO_Audiencia.csv
@@ -483,6 +495,32 @@ public class App {
             System.out.println("Arquivo não encontrado.");
         } catch (ArrayIndexOutOfBoundsException ex) {
             System.out.println("Formato do arquivo de Cliente invalido.");
+        }
+    }
+
+    private static void carregaDados() throws ClassNotFoundException, FileNotFoundException, IOException {
+        try {
+            FileInputStream arquivo = new FileInputStream("Dados/POO_Plataforma.bin");
+            ObjectInputStream dados = new ObjectInputStream(arquivo);
+            plataforma = (Plataforma) dados.readObject();
+        } catch (FileNotFoundException ex) {
+            throw new FileNotFoundException("Não foi encontrado o arquivo de dados POO_Plataforma.bin");
+        } catch (IOException | ClassNotFoundException ex) {
+            throw new ClassNotFoundException("O objeto não foi encontrado no arquivo.");
+
+        }
+    }
+
+    private static void salvaDados() {
+        try {
+            FileOutputStream arquivo = new FileOutputStream("Dados/POO_Plataforma.bin", false);
+            ObjectOutputStream dados = new ObjectOutputStream(arquivo);
+            dados.writeObject(plataforma);
+            System.out.println("\nDados salvos com sucesso.");
+        } catch (FileNotFoundException ex) {
+            System.out.println("Não foi possivel salvar o arquivo de dados POO_Plataforma.bin");
+        } catch (IOException ex) {
+            System.out.println("O objeto para salvar é nulo. Processo interrompido.");
         }
     }
     // #endregion
