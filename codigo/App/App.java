@@ -15,6 +15,8 @@ import Classes.FilmeLonga;
 import Classes.Midia;
 import Classes.Plataforma;
 import Classes.Serie;
+import Utilidades.FormataArquivos;
+import Utilidades.UsuarioNaoEncontradoException;
 
 public class App {
 
@@ -27,6 +29,7 @@ public class App {
         limparTela();
 
         try {
+            //carregaDadosIniciais();  Para carregar arquivos originais descomentar essa linha e comnetar a linha abaixo.
             carregaDados();
 
             if (menuPlataforma() == 1)
@@ -416,6 +419,14 @@ public class App {
     }
     // #endregion
     // #region carga de dados
+
+    private static void carregaDadosIniciais() {
+        carregaCliente();
+        carregaFilmes();
+        carregaSeries();
+        carregaAudiencia();
+    }
+
     /**
      * Carrega todos os Cliente no sistema se existir o arquivo
      * Dados/POO_Audiencia.csv

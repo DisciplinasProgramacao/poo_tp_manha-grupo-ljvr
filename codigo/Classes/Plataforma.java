@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import Utilidades.GeradorString;
+
 // TO DO: rever funcionamento da classe antes da implementação final e remover code smell antes de publicar o app
 
 public class Plataforma implements Serializable{
@@ -150,15 +152,69 @@ public class Plataforma implements Serializable{
 		
 	}
 
+	/**
+	 * Retorna a lista de todas as midias presente no catalógo da plataforma.
+	 * @return String com todas as Midias.
+	 * @throws NoSuchElementException Retonra exceção se não houver midias.
+	 */
 	public String relatorioTodasMidias() throws NoSuchElementException{
         if(!tableMidiasGerais.isEmpty()){
-            String report = tableMidiasGerais.values().stream()
-                        .map(m -> m.toString())
-                       .reduce((m1,m2)-> m1.concat("\n".concat(m2))).get();
+            String report = GeradorString.geraStringRelatorioMidias(tableMidiasGerais.values());
             return report;
         }
         else{
-            throw new NoSuchElementException("Lista de Midias futuras está vazia");
+            throw new NoSuchElementException("Lista de Midias está vazia");
         }
     }
+
+	/**
+     * Retorna uma String com a lista de midias filtradas por nome.
+     * @param nome Nome que deseja-se pequisar na lista.
+     * @return String com a lista de midias.
+	 * @throws NoSuchElementException Retonra exceção se não houver midias.
+     */
+	public String relatorioMidiasFiltradasNome(String nome)throws NoSuchElementException{
+		if(!tableMidiasGerais.isEmpty()){
+			Collection<Midia> filtradas = FiltroMidia.buscarNome(tableMidiasGerais.values(),nome);
+            String report = GeradorString.geraStringRelatorioMidias(filtradas);
+            return report;
+        }
+        else{
+            throw new NoSuchElementException("Lista de Midias está vazia");
+        }
+	}
+
+	/**
+     * Retorna uma String com a lista de midias filtradas por idioma.
+     * @param idioma Idioma que deseja-se pequisar na lista.
+     * @return String com a lista de midias.
+	 * @throws NoSuchElementException Retonra exceção se não houver midias.
+     */
+	public String relatorioMidiasFiltradasIdioma(String idioma)throws NoSuchElementException{
+		if(!tableMidiasGerais.isEmpty()){
+			Collection<Midia> filtradas = FiltroMidia.buscarNome(tableMidiasGerais.values(),idioma);
+            String report = GeradorString.geraStringRelatorioMidias(filtradas);
+            return report;
+        }
+        else{
+            throw new NoSuchElementException("Lista de Midias está vazia");
+        }
+	}
+	
+	/**
+     * Retorna uma String com a lista de midias filtradas por genero.
+     * @param genero Genero que deseja-se pequisar na lista.
+     * @return String com a lista de midias.
+	 * @throws NoSuchElementException Retonra exceção se não houver midias.
+     */
+	public String relatorioMidiasFiltradasgenero(String genero)throws NoSuchElementException{
+		if(!tableMidiasGerais.isEmpty()){
+			Collection<Midia> filtradas = FiltroMidia.buscarGenero(tableMidiasGerais.values(),genero);
+            String report = GeradorString.geraStringRelatorioMidias(filtradas);
+            return report;
+        }
+        else{
+            throw new NoSuchElementException("Lista de Midias está vazia");
+        }
+	}
 }
