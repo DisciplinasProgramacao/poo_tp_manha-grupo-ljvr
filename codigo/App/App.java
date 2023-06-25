@@ -16,7 +16,6 @@ import Classes.FiltroMidia;
 import Classes.Midia;
 import Classes.Plataforma;
 import Classes.Serie;
-import Tests.FilmeLongaTest;
 import Utilidades.FormataArquivos;
 import Utilidades.UsuarioNaoEncontradoException;
 
